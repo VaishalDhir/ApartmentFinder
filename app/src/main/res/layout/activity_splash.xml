@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splashbackground"
+    tools:context=".Splash">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CE312C51"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/ani1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
+            android:fontFamily="@font/bangers"
+            android:text="A.F"
+            android:textAlignment="center"
+            android:textColor="#F0C38E"
+            android:textSize="100dp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/anim_2"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:fontFamily="@font/bangers"
+            android:text="APARTMENT FINDER"
+            android:textAlignment="center"
+            android:textColor="#F0C38E"
+            android:textSize="50dp"></TextView>
+
+
+
+        <TextView
+            android:id="@+id/anim_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:text="FIND YOUR DREAM APARTMENT"
+            android:textAlignment="center"
+            android:textColor="#F0C38E"
+            android:textSize="25dp"></TextView>
+
+
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>
