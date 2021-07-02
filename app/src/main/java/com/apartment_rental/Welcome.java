@@ -100,7 +100,7 @@ public class Welcome extends AppCompatActivity {
 
     private void launchHomeScreen() {
         shrdpreference.setFirstTimeLaunch(false);
-        startActivity(new Intent(Welcome.this, MainActivity.class));
+        startActivity(new Intent(Welcome.this, Home.class));
         finish();
     }
     private void changeStatusBarColor() {

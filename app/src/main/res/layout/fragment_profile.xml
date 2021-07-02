@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.ProfileFragment"
+    android:background="@drawable/splashbackground"
+    >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CE312C51"
+        android:id="@+id/rel1"
+        android:visibility="gone"
+        android:gravity="center">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/roundshapebtn"
+            android:text="LOGIN"
+            android:textColor="@color/pale_orange"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:id="@+id/loginPagebtn"
+           />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/roundshapebtn"
+            android:layout_below="@+id/loginPagebtn"
+            android:layout_marginTop="10dp"
+            android:text="Create Account"
+            android:textColor="@color/pale_orange"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:id="@+id/registeraccountbtn"
+            />
+        <TextView
+            android:id="@+id/textapp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:fontFamily="@font/bangers"
+            android:text="APARTMENT FINDER"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/registeraccountbtn"
+            android:textAlignment="center"
+            android:textColor="#F0C38E"
+            android:textSize="50dp">
+
+        </TextView>
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CE312C51"
+        android:id="@+id/rel2"
+        android:gravity="center">
+    </RelativeLayout>
+</RelativeLayout>
