@@ -2,6 +2,7 @@ const { check } = require("express-validator");
 const reg = require("../model/register");
 const login = require("../model/SignIn");
 const update = require("../model/update");
+const resetPassword = require("../model/resetpassword");
 //const products = require("../model/products");
 const router = require("express").Router();
 
@@ -38,5 +39,6 @@ router.post(
 );
 
 router.post("/update", update);
+router.post("/reset", resetPassword);
 //router.post("/getProduct", products);
 module.exports = router;
