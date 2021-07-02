@@ -28,7 +28,7 @@ const register = async (req, res, next) => {
           let uname = req.body.email;
           if (uname.trim() !== "" && uname !== undefined) {
             conn.query(
-              "INSERT INTO User (firstname,lastname,email,Contact,password,type) VALUES (?,?,?,?,?,?)",
+              "INSERT INTO user (firstname,lastname,email,Contact,password,type) VALUES (?,?,?,?,?,?)",
               [
                 req.body.firstname,
                 req.body.lastname,

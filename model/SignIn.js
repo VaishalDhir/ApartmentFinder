@@ -14,7 +14,7 @@ const SignIn = async (req, res, next) => {
   if (uname.trim() !== "" && uname !== undefined) {
     try {
       await conn.query(
-        "SELECT * from User WHERE email=?",
+        "SELECT * from user WHERE email=?",
         [uname],
         function (error, results, fields) {
           if (error) {

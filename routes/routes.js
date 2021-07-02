@@ -1,6 +1,7 @@
 const { check } = require("express-validator");
 const reg = require("../model/register");
 const login = require("../model/SignIn");
+const update = require("../model/update");
 //const products = require("../model/products");
 const router = require("express").Router();
 
@@ -35,5 +36,7 @@ router.post(
   ],
   login
 );
+
+router.post("/update", update);
 //router.post("/getProduct", products);
 module.exports = router;
