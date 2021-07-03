@@ -6,14 +6,12 @@
     tools:context=".ui.ProfileFragment"
     android:background="@drawable/splashbackground"
     >
-
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#CE312C51"
         android:id="@+id/rel1"
-        android:visibility="gone"
+
         android:gravity="center">
 
         <Button
@@ -59,6 +57,77 @@
         android:layout_height="match_parent"
         android:background="#CE312C51"
         android:id="@+id/rel2"
-        android:gravity="center">
+        android:paddingTop="100dp"
+        android:visibility="gone"
+       >
+        <TextView
+            android:id="@+id/ani1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/bangers"
+            android:text="Hello Renter..."
+            android:textAlignment="center"
+            android:textColor="#F0C38E"
+            android:textSize="60dp"
+            >
+
+        </TextView>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/roundshapebtn"
+            android:text="ADD PROPERTY"
+            android:textColor="@color/pale_orange"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:id="@+id/addPropertybtn"
+            android:layout_below="@+id/ani1"
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/roundshapebtn"
+            android:text="UPDATE PROFILE"
+            android:textColor="@color/pale_orange"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:id="@+id/updateprofilebtn"
+            android:layout_below="@+id/addPropertybtn"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/montserrat"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/roundshapebtn"
+            android:text="VIEW YOUR PROPERTIES"
+            android:textColor="@color/pale_orange"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:id="@+id/viewpropbtn"
+            android:layout_below="@+id/updateprofilebtn"
+            android:layout_marginTop="15dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/roundshapebtn"
+            android:text="SIGNOUT"
+            android:textColor="@color/pale_orange"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:id="@+id/signout"
+            android:layout_below="@+id/viewpropbtn"
+            android:layout_marginTop="15dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat"
+            />
     </RelativeLayout>
 </RelativeLayout>
