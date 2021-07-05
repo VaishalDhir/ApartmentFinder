@@ -61,7 +61,7 @@
         android:visibility="gone"
        >
         <TextView
-            android:id="@+id/ani1"
+            android:id="@+id/hellotext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -83,7 +83,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:id="@+id/addPropertybtn"
-            android:layout_below="@+id/ani1"
+            android:layout_below="@+id/hellotext"
             android:textStyle="bold"
             android:fontFamily="@font/montserrat"
             />

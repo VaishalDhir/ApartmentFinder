@@ -7,6 +7,11 @@ public class SharedPref {
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
+    private static final String FIRSTNAME="firstname";
+    private static final String LASTNAME="firstname";
+    private static final String ISLOGIN="firstname";
+    private static final String CONTACTNUMBER="firstname";
+
 
     public SharedPref(Context con)
     {
@@ -20,6 +25,46 @@ public class SharedPref {
 
     public boolean isFirstTimeLaunch() {
         return sharedPref.getBoolean(IS_FIRST_TIME_LAUNCH, true);
+    }
+
+    public void setFirstname(String firstname){
+        editor.putString("fname",firstname);
+        editor.commit();
+    }
+    public String getFirstname(){
+        return sharedPref.getString("fname","");
+    }
+    public void setLastname(String lastname){
+        editor.putString(LASTNAME,lastname);
+        editor.commit();
+    }
+    public String getLastname(){
+        return sharedPref.getString(LASTNAME,"");
+
+    }
+    public void setContactnumber(String number){
+        editor.putString(CONTACTNUMBER,number);
+        editor.commit();
+    }
+    public String getContactnumber(){
+        return sharedPref.getString(CONTACTNUMBER,"");
+    }
+
+
+//
+//    public void setIslogin(boolean isFirstTime) {
+//        editor.putBoolean(ISLOGIN, isFirstTime);
+//        editor.commit();
+//    }
+//
+//    public boolean isLogin() {
+//        return sharedPref.getBoolean(ISLOGIN, true);
+//    }
+
+    public  void clearPreferences(){
+        setFirstname("");
+        //setIslogin(false);
+
     }
 
 }

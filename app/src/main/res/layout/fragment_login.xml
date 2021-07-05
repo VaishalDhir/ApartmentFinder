@@ -33,7 +33,8 @@
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
             android:hint="Enter Your Email Id"
-            android:padding="4dp"
+            android:textAlignment="center"
+            android:padding="6dp"
             android:layout_marginTop="50dp"
             android:fontFamily="@font/montserrat"
             android:inputType="textEmailAddress"
@@ -43,12 +44,13 @@
             android:layout_height="40dp"
             android:layout_below="@id/email_ed"
             android:inputType="textPassword"
+            android:textAlignment="center"
             android:layout_marginTop="15dp"
             android:background="@drawable/edbackground"
             android:layout_marginRight="35dp"
-            android:padding="4dp"
+            android:padding="6dp"
             android:layout_marginLeft="35dp"
-            android:hint="Enter Your Email Id"
+            android:hint="Enter Password"
             android:fontFamily="@font/montserrat"
             android:id="@+id/password_ed"/>
 
@@ -91,12 +93,14 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rel1"
+            android:layout_below="@+id/rel1_btn"
             android:text="Forgot Password?"
+            android:layout_marginTop="5dp"
             android:textSize="20dp"
             android:fontFamily="@font/montserrat"
             android:textColor="@color/pale_orange"
             android:textAlignment="center"
+            android:id="@+id/Resetpassword"
             />
     </RelativeLayout>
 

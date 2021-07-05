@@ -10,8 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.apartment_rental.R;
+import com.apartment_rental.SharedPref;
 
 
 public class ProfileFragment extends Fragment {
@@ -28,6 +31,19 @@ public class ProfileFragment extends Fragment {
         Button updateProfilePage=(Button) vw.findViewById(R.id.updateprofilebtn);
         Button ViewPropertyPage=(Button) vw.findViewById(R.id.viewpropbtn);
         Button SignOut=(Button) vw.findViewById(R.id.signout);
+        TextView helloText=(TextView) vw.findViewById(R.id.hellotext);
+        RelativeLayout relativeLay1=(RelativeLayout) vw.findViewById(R.id.rel1);
+        RelativeLayout relativeLay2=(RelativeLayout) vw.findViewById(R.id.rel2);
+
+        SharedPref shrd=new SharedPref(getActivity());
+        if(!(shrd.getFirstname().equals(""))){
+            relativeLay1.setVisibility(View.GONE);
+            relativeLay2.setVisibility(View.VISIBLE);
+            helloText.setText("Hello "+shrd.getFirstname()+"...");
+        }else {
+            relativeLay1.setVisibility(View.VISIBLE);
+            relativeLay2.setVisibility(View.GONE);
+        }
         loginPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +79,9 @@ public class ProfileFragment extends Fragment {
         SignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+            shrd.clearPreferences();
+            Fragment frag=new ProfileFragment();
+            loadFragment(getContext(),frag);
             }
         });
         return vw;

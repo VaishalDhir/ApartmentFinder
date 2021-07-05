@@ -8,25 +8,21 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apartment_rental.R;
+import com.apartment_rental.SharedPref;
 import com.apartment_rental.controller.ApiUtils;
 import com.apartment_rental.controller.UserService;
 import com.apartment_rental.model.LoginPojo;
 import com.apartment_rental.model.LoginResponse;
 
-import java.util.concurrent.TimeUnit;
-
-import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginFragment extends Fragment {
     UserService userServices;
@@ -40,19 +36,21 @@ public class LoginFragment extends Fragment {
         EditText emailIdEditText = (EditText) view.findViewById(R.id.email_ed);
         EditText passwordEditText = (EditText) view.findViewById(R.id.password_ed);
         RelativeLayout loginButton = (RelativeLayout) view.findViewById(R.id.rel1_btn);
+        TextView ResetPasswordText=(TextView) view.findViewById(R.id.Resetpassword);
         userServices = ApiUtils.getUserService();
-//        try {
-//
-//            Retrofit retrofit = new Retrofit.Builder()
-//                    .baseUrl("http://10.0.2.2:8012/api/")  // for emulator
-//                    // .baseUrl("http://192.168.2.28:8012/api/")       //for mobile device use ipconfig in cmd and then wireless and then take ip of ipv4
-//                    .addConverterFactory(GsonConverterFactory.create())
-//                    .build();
-//            userServices = retrofit.create(UserService.class);
-//
-//        } catch (Exception e) {
-//            Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
-//        }
+
+        ResetPasswordText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new ResetPasswordFragment();
+                ((AppCompatActivity) getActivity()).getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.nav_host_fragment, fragment)
+                        .addToBackStack(fragment.getTag())
+                        .commit();
+            }
+        });
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,15 +69,17 @@ public class LoginFragment extends Fragment {
 
     private void Authenticate(String emaidId, String passwordText) {
         try {
-            LoginPojo login = new LoginPojo(emaidId, passwordText);
             Call<LoginResponse> call = userServices.loginUser(emaidId,passwordText);
             call.enqueue(new Callback<LoginResponse>() {
                 @Override
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                     if (response.isSuccessful()) {
-                        if(response.message().equals("OK")){
-                            String body=response.body().getMessage();
-                            System.out.println("hello world"+body);
+
+                            if(response.body().getSuccess()){
+                                SharedPref shrd=new SharedPref(getActivity());
+                            //    shrd.setIslogin(true);
+                                shrd.setFirstname(response.body().getData().get(0).getFirstname());
+                              //  shrd.setFirstname(response.body().getData().get(0).getContact());
                             Fragment fragment = new ProfileFragment();
                             ((AppCompatActivity) getActivity()).getSupportFragmentManager()
                                     .beginTransaction()
@@ -89,8 +89,6 @@ public class LoginFragment extends Fragment {
                         }else {
                             Toast.makeText(getContext(), "Wrong email id or password", Toast.LENGTH_SHORT).show();
                         }
-
-
                     } else {
                         Toast.makeText(getContext(), "Error! Please try again!", Toast.LENGTH_SHORT).show();
                     }

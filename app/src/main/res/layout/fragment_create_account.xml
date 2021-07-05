@@ -26,14 +26,22 @@
             android:textColor="#F0C38E"
             android:textSize="100dp"
             >
-
         </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ani1"
+            android:textColor="@color/pale_orange"
+            android:textAlignment="center"
+            android:id="@+id/errortext"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_below="@id/ani1"
             android:background="@drawable/edbackground"
             android:layout_marginRight="35dp"
+            android:textAlignment="center"
             android:layout_marginLeft="35dp"
             android:hint="Enter First Name"
             android:padding="4dp"
@@ -49,6 +57,7 @@
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
             android:hint="Enter Your Last Name"
+            android:textAlignment="center"
 
             android:padding="4dp"
             android:layout_marginTop="30dp"
@@ -65,19 +74,23 @@
             android:layout_marginLeft="35dp"
             android:hint="Enter Your Email Id"
             android:padding="4dp"
+            android:textAlignment="center"
+
             android:layout_marginTop="30dp"
             android:fontFamily="@font/montserrat"
             android:inputType="textEmailAddress"
-            android:id="@+id/email_ed"/>
+            android:id="@+id/emailid_ed"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_below="@id/email_ed"
+            android:layout_below="@id/emailid_ed"
             android:background="@drawable/edbackground"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
             android:hint="Enter Your Phone Number"
             android:padding="4dp"
+            android:textAlignment="center"
+
             android:layout_marginTop="30dp"
             android:fontFamily="@font/montserrat"
             android:inputType="number"
@@ -87,24 +100,28 @@
             android:layout_height="40dp"
             android:layout_below="@id/contact_ed"
             android:inputType="textPassword"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/edbackground"
             android:layout_marginRight="35dp"
             android:padding="4dp"
+            android:textAlignment="center"
+
             android:layout_marginLeft="35dp"
             android:hint="Enter Your Password"
             android:fontFamily="@font/montserrat"
-            android:id="@+id/password_ed"/>
+            android:id="@+id/createpassword_ed"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_below="@id/password_ed"
+            android:layout_below="@id/createpassword_ed"
             android:background="@drawable/edbackground"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"
             android:hint="Confirm Password"
+            android:textAlignment="center"
+
             android:padding="4dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="30dp"
             android:fontFamily="@font/montserrat"
             android:inputType="textPassword"
             android:id="@+id/confirm_ed"/>
@@ -115,7 +132,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/confirm_ed"
             android:gravity="center"
-            android:id="@+id/rel1"
+            android:id="@+id/rel_create"
             android:layout_marginTop="25dp">
 
             <TextView
@@ -143,8 +160,6 @@
                 android:textColor="#FFFFFF"
                 android:textSize="15sp" />
         </RelativeLayout>
-
-
 
     </RelativeLayout>
 
