@@ -5,7 +5,9 @@ const jwt = require("jsonwebtoken");
 
 const SignIn = async (req, res, next) => {
   const error = validationResult(req);
-
+  // const salt = await bcrypt.genSalt(10);
+  // now we set user password to hashed password
+  // let pass = await bcrypt.hash(req.body.password, salt);
   if (!error) {
     console.log(error);
     return res.json({ status: 412, error: error.array() });
@@ -23,36 +25,30 @@ const SignIn = async (req, res, next) => {
               message: "there are some error with query",
             });
           } else {
+            console.log("here");
             if (results.length > 0) {
-              const passwordMatch = bcrypt.compare(
+              bcrypt.compare(
                 req.body.password,
-                results[0].password
+                results[0].password,
+                function (err, resb) {
+                  if (resb) {
+                    return res.json({
+                      status: 404,
+                      success: true,
+                      message: "Login Successfully",
+                      data: results,
+                      //  token: jToken,
+                    });
+                  } else {
+                    res.json({
+                      status: 422,
+                      success: false,
+                      message: "incorrect password",
+                      data: [],
+                    });
+                  }
+                }
               );
-              if (!passwordMatch) {
-                //  console.log("get not ok report");
-                res.json({
-                  status: 422,
-                  success: false,
-                  message: "incorrect password",
-                  data: results,
-                });
-              } else {
-                // console.log("get ok report");
-                // const jToken = jwt.sign(
-                //   { id: results[0].id },
-                //   "the-super-strong-secrect",
-                //   {
-                //     expiresIn: "1h",
-                //   }
-                // );
-                return res.json({
-                  status: 404,
-                  success: true,
-                  message: "Login Successfully",
-                  data: results,
-                  //  token: jToken,
-                });
-              }
             } else {
               res.json({
                 status: 404,

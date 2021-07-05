@@ -4,9 +4,12 @@ const conn = require("../config/db");
 
 const updatePass = async (req, res, next) => {
   try {
-    const pass = await bcrypt.hash(req.body.password, 12);
-
-    conn.query(
+    // generate salt to hash password
+    const salt = await bcrypt.genSalt(10);
+    // now we set user password to hashed password
+    let pass = await bcrypt.hash(req.body.password, salt);
+    console.log(pass);
+    await conn.query(
       `UPDATE user SET password='${pass}' WHERE email='${req.body.email}'`,
 
       function (error, results, fields) {

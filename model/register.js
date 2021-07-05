@@ -9,7 +9,9 @@ const register = async (req, res, next) => {
     return res.json({ status: 412, error: error.array() });
   }
   try {
-    const pass = await bcrypt.hash(req.body.password, 12);
+    const salt = await bcrypt.genSalt(10);
+    // now we set user password to hashed password
+    let pass = await bcrypt.hash(req.body.password, salt);
     conn.query(
       "SELECT * from user WHERE email=?",
       [req.body.email],
