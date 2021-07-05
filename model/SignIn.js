@@ -29,20 +29,28 @@ const SignIn = async (req, res, next) => {
                 results[0].password
               );
               if (!passwordMatch) {
+                //  console.log("get not ok report");
                 res.json({
                   status: 422,
+                  success: false,
                   message: "incorrect password",
+                  data: results,
                 });
               } else {
-                const jToken = jwt.sign(
-                  { id: results[0].id },
-                  "the-super-strong-secrect",
-                  {
-                    expiresIn: "1h",
-                  }
-                );
+                // console.log("get ok report");
+                // const jToken = jwt.sign(
+                //   { id: results[0].id },
+                //   "the-super-strong-secrect",
+                //   {
+                //     expiresIn: "1h",
+                //   }
+                // );
                 return res.json({
-                  token: jToken,
+                  status: 404,
+                  success: true,
+                  message: "Login Successfully",
+                  data: results,
+                  //  token: jToken,
                 });
               }
             } else {

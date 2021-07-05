@@ -22,6 +22,7 @@ const register = async (req, res, next) => {
           });
         } else if (results.length != 0) {
           res.json({
+            status: false,
             message: "Email id already exists",
           });
         } else {
@@ -47,6 +48,7 @@ const register = async (req, res, next) => {
                 } else {
                   console.log("response here");
                   res.json({
+                    status: true,
                     message: "success",
                   });
                 }

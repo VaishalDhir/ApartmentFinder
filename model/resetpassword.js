@@ -16,10 +16,16 @@ const updatePass = async (req, res, next) => {
             status: false,
             message: "there are some error with query",
           });
-        } else {
+        } else if (results.length != 0) {
           console.log("response here");
           res.json({
+            status: true,
             message: "password updated Successfully",
+          });
+        } else {
+          res.json({
+            status: true,
+            message: "No Such Email Id",
           });
         }
       }
