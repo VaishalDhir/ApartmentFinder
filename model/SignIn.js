@@ -60,7 +60,7 @@ const SignIn = async (req, res, next) => {
       );
     } catch (err) {
       next(err);
-      res.json({ status: 412, error: erroerrr.array() });
+      res.json({ status: 412, error: err.array() });
     }
   } else {
     return res.json({ status: 412, error: error.array() });
