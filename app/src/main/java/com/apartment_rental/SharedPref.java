@@ -11,6 +11,7 @@ public class SharedPref {
     private static final String LASTNAME="firstname";
     private static final String ISLOGIN="firstname";
     private static final String CONTACTNUMBER="firstname";
+    private static final String USERID="userid";
 
 
     public SharedPref(Context con)
@@ -50,7 +51,15 @@ public class SharedPref {
         return sharedPref.getString(CONTACTNUMBER,"");
     }
 
+    public void setUserId(int userId){
+        editor.putInt(USERID,userId);
+        editor.commit();
+    }
+    public int getUserid(){
+        return sharedPref.getInt(USERID,0);
 
+
+    }
 //
 //    public void setIslogin(boolean isFirstTime) {
 //        editor.putBoolean(ISLOGIN, isFirstTime);

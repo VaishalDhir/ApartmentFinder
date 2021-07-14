@@ -79,7 +79,7 @@ public class LoginFragment extends Fragment {
                                 SharedPref shrd=new SharedPref(getActivity());
                             //    shrd.setIslogin(true);
                                 shrd.setFirstname(response.body().getData().get(0).getFirstname());
-                              //  shrd.setFirstname(response.body().getData().get(0).getContact());
+                                shrd.setUserId(response.body().getData().get(0).getUserid());
                             Fragment fragment = new ProfileFragment();
                             ((AppCompatActivity) getActivity()).getSupportFragmentManager()
                                     .beginTransaction()

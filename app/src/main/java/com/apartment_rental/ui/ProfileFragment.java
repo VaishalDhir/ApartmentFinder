@@ -61,7 +61,8 @@ public class ProfileFragment extends Fragment {
         addPropertyPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Fragment frag=new AddApartmentFragment();
+                loadFragment(getContext(),frag);
             }
         });
        updateProfilePage.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +77,7 @@ public class ProfileFragment extends Fragment {
 
            }
        });
+
         SignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,8 +89,6 @@ public class ProfileFragment extends Fragment {
         return vw;
     }
 
-
-
     private void loadFragment(Context context, Fragment fragment) {
         ((AppCompatActivity) context).getSupportFragmentManager()
                 .beginTransaction()
@@ -96,4 +96,5 @@ public class ProfileFragment extends Fragment {
                 .addToBackStack(fragment.getTag())
                 .commit();
     }
-    }
+
+}
