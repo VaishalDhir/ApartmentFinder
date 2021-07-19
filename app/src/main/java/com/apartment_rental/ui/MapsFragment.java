@@ -2,6 +2,7 @@ package com.apartment_rental.ui;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
@@ -12,8 +13,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.apartment_rental.R;
+import com.apartment_rental.controller.ApiUtils;
+import com.apartment_rental.controller.UserService;
+import com.apartment_rental.model.Apartments;
+import com.apartment_rental.model.Register;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -21,7 +27,16 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MapsFragment extends Fragment {
+    UserService userServices;
+    List<Apartments> apart=new ArrayList<>();
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
@@ -36,9 +51,58 @@ public class MapsFragment extends Fragment {
          */
         @Override
         public void onMapReady(GoogleMap googleMap) {
-            LatLng sydney = new LatLng(-34, 151);
-            googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+            try {
+                Call<Apartments> call=userServices.getAllApartments();
+                call.enqueue(new Callback<Apartments>() {
+                    @Override
+                    public void onResponse(Call<Apartments> call, Response<Apartments> response) {
+                        if (response.isSuccessful()) {
+
+                            if(response.body().getStatus()){
+                                apart.add(response.body());
+                                for (int i = 0; i < apart.size(); i++) {
+                                    int len=apart.get(i).getData().size();
+                                      for (int j = i; j <=len-1 ; j++) {
+                                          LatLng latLng = new LatLng(apart.get(i).getData().get(j).getLatitude(), apart.get(i).getData().get(j).getLongitude());
+
+                                         // LatLng sydney = new LatLng(-34, 151);
+                                          googleMap.addMarker(new MarkerOptions().position(latLng));
+                                          googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11.0f));
+                                          googleMap.getUiSettings().setZoomControlsEnabled(true);
+                                      }
+                                }
+
+
+                            }
+                        } else {
+                            Toast.makeText(getContext(), "Error! Please try again!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Apartments> call, Throwable t) {
+                        System.out.println("error");
+                    }
+                });
+            }catch (Exception ex){
+                System.out.println(ex.toString());
+
+            }
+
+
+
+
+
+
+            // inside on map ready method
+            // we will be displaying all our markers.
+            // for adding markers we are running for loop and
+            // inside that we are drawing marker on our map.
+
+
+
+
         }
     };
 
@@ -62,6 +126,9 @@ public class MapsFragment extends Fragment {
 
             }
         }
+        userServices = ApiUtils.getUserService();
+     //   getApartmentData();
+
         return inflater.inflate(R.layout.fragment_maps, container, false);
     }
 

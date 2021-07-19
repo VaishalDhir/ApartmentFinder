@@ -28,8 +28,6 @@ public class Splash extends AppCompatActivity {
     private static int SPLASH_SCREEN = 5000;
     Animation topAnim, bottomAnim;
 
-
-    //TextView RSA,App_Name, slogan;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +55,4 @@ public class Splash extends AppCompatActivity {
             }
         }, SPLASH_SCREEN);
     }
-
-
 }

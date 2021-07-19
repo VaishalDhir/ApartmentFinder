@@ -21,7 +21,7 @@ public class Datuap {
     private String apartmentType;
     @SerializedName("Rent")
     @Expose
-    private String rent;
+    private Integer rent;
     @SerializedName("Size")
     @Expose
     private String size;
@@ -48,10 +48,10 @@ public class Datuap {
     private String createdAt;
     @SerializedName("latitude")
     @Expose
-    private Integer latitude;
+    private double latitude;
     @SerializedName("longitude")
     @Expose
-    private Integer longitude;
+    private double longitude;
 
     public Integer getApartmentId() {
         return apartmentId;
@@ -85,11 +85,11 @@ public class Datuap {
         this.apartmentType = apartmentType;
     }
 
-    public String getRent() {
+    public Integer getRent() {
         return rent;
     }
 
-    public void setRent(String rent) {
+    public void setRent(Integer rent) {
         this.rent = rent;
     }
 
@@ -157,19 +157,19 @@ public class Datuap {
         this.createdAt = createdAt;
     }
 
-    public Integer getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Integer latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public Integer getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Integer longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 

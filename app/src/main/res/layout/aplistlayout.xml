@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <androidx.cardview.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view_inner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="3dp"
+        android:padding="6dp"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="0dp" >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:id="@+id/apImage"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:fontFamily="@font/montserrat"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:textColor="@color/black_text"
+
+            android:id="@+id/apType"
+            android:layout_below="@+id/apImage"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/montserrat"
+                android:textSize="13dp"
+                android:background="#E4E4E4"
+                android:id="@+id/apRent"
+                android:textColor="@color/black_text"
+                android:layout_below="@+id/apType"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:layout_below="@+id/apType"
+                android:layout_marginRight="15dp"
+                android:layout_toEndOf="@id/apType">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_done_outline_24"
+                   />
+            </RelativeLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/apFacility"
+                android:textSize="14dp"
+
+                android:layout_below="@+id/apRent"
+                android:fontFamily="@font/montserrat"/>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

@@ -1,12 +1,14 @@
 package com.apartment_rental.controller;
 
 import com.apartment_rental.model.AddApartment;
+import com.apartment_rental.model.Apartments;
 import com.apartment_rental.model.LoginResponse;
 import com.apartment_rental.model.Register;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface UserService {
@@ -32,4 +34,7 @@ public interface UserService {
                                       @Field("Description") String Description, @Field("RenterType") String RenterType,
                                       @Field("img1") byte[] img1, @Field("img2") byte[] img2, @Field("img3") byte[] img3,
             @Field("latitude") double latitude, @Field("longitude") double longitude);
+
+    @GET("getprop/")
+    Call<Apartments> getAllApartments();
 }
