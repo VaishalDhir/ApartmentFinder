@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+<RelativeLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ui.ViewApartmentFragment"
+    android:background="#CE312C51">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:background="#FFFFFF"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="23dp"
+            android:textAlignment="center"
+            android:fontFamily="@font/montserrat"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            android:background="@color/pale_orange"
+            android:id="@+id/vapType">
+
+        </TextView>
+        <androidx.viewpager.widget.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:padding="5dp"
+            android:layout_below="@id/vapType"
+            android:id="@+id/imgPager">
+        </androidx.viewpager.widget.ViewPager>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:orientation="horizontal"
+            android:layout_below="@+id/imgPager"
+            android:id="@+id/lineraLay"
+            android:layout_marginTop="12dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.33"
+                android:textStyle="normal"
+                android:textAlignment="center"
+                android:fontFamily="@font/montserrat"
+                android:textSize="14dp"
+                android:textColor="@color/black_text"
+                android:id="@+id/vapRent">
+
+            </TextView>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.33"
+                android:textAlignment="center"
+
+                android:textStyle="normal"
+                android:fontFamily="@font/montserrat"
+                android:textSize="14dp"
+                android:textColor="@color/black_text"
+                android:id="@+id/vapSize">
+
+            </TextView>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.33"
+                android:textStyle="normal"
+                android:textAlignment="center"
+
+
+                android:fontFamily="@font/montserrat"
+                android:textSize="14dp"
+                android:textColor="@color/black_text"
+                android:id="@+id/renterType">
+
+            </TextView>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/vapAddress"
+            android:textStyle="bold"
+            android:textAlignment="center"
+
+            android:fontFamily="@font/montserrat"
+            android:layout_below="@+id/lineraLay"
+            android:layout_marginTop="10dp"
+            android:textSize="18dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:textColor="@color/black_text"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/vapdiscription"
+            android:textAlignment="center"
+
+            android:textStyle="normal"
+            android:fontFamily="@font/montserrat"
+            android:layout_below="@+id/vapAddress"
+            android:layout_marginTop="10dp"
+            android:textSize="15dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:textColor="@color/black_text"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/White"
+           android:background="#CE312C51"
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:text="CONTACT PERSON"
+            android:layout_marginTop="40dp"
+            android:layout_below="@+id/vapdiscription">
+
+        </Button>
+    </RelativeLayout>
+
+</RelativeLayout>
+</ScrollView>
