@@ -31,22 +31,6 @@ public class ViewApartmentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        Bundle bundle = this.getArguments();
-
-        String Type = bundle.getString("atype");
-        String RenterType = bundle.getString("renter");
-        String Description = bundle.getString("description");
-        String Address = bundle.getString("address");
-        String Size=bundle.getString("size");
-        int Rent=bundle.getInt("rent");
-       byte[] img1=bundle.getByteArray("img1");
-        byte[] img2=bundle.getByteArray("img2");
-        byte[] img3=bundle.getByteArray("img3");
-
-        ArrayList<byte[]> imgList=new ArrayList<>();
-        imgList.add(img1);
-        imgList.add(img2);
-        imgList.add(img3);
 
         View vw=inflater.inflate(R.layout.fragment_view_apartment, container, false);
         ViewPager imagePager=(ViewPager) vw.findViewById(R.id.imgPager);
@@ -56,6 +40,22 @@ public class ViewApartmentFragment extends Fragment {
         TextView vapAddress=(TextView) vw.findViewById(R.id.vapAddress);
         TextView vapType=(TextView) vw.findViewById(R.id.vapType);
         TextView vapDesc=(TextView) vw.findViewById(R.id.vapdiscription);
+        Bundle bundle = this.getArguments();
+
+        String Type = bundle.getString("atype");
+        String RenterType = bundle.getString("renter");
+        String Description = bundle.getString("description");
+        String Address = bundle.getString("address");
+        String Size=bundle.getString("size");
+        int Rent=bundle.getInt("rent");
+        byte[] img1=bundle.getByteArray("img1");
+        byte[] img2=bundle.getByteArray("img2");
+        byte[] img3=bundle.getByteArray("img3");
+
+        ArrayList<byte[]> imgList=new ArrayList<>();
+        imgList.add(img1);
+        imgList.add(img2);
+        imgList.add(img3);
 
         // Initializing the ViewPagerAdapter
       ViewPagerAdapter  mViewPagerAdapter = new ViewPagerAdapter(getActivity(), imgList);
