@@ -4,7 +4,7 @@ const login = require("../model/SignIn");
 const update = require("../model/update");
 const resetPassword = require("../model/resetpassword");
 const insertProp = require("../model/InsertProperty");
-//const products = require("../model/products");
+const Properties = require("../model/GetProperties");
 const router = require("express").Router();
 
 router.post(
@@ -43,5 +43,5 @@ router.post("/update", update);
 router.post("/reset", resetPassword);
 router.post("/insertprop", insertProp);
 
-//router.post("/getProduct", products);
+router.get("/getprop", Properties);
 module.exports = router;
