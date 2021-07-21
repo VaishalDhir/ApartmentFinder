@@ -1,7 +1,6 @@
-var fs = require("fs");
-const { validationResult } = require("express-validator");
 const conn = require("../config/db");
-const InsertProperty = async (req, res, next) => {
+
+const UpdateProperty = async (req, res, next) => {
   console.log(req.body.img1);
   const img1 = Buffer.from(req.body.img1);
   const img2 = Buffer.from(req.body.img2);
@@ -9,7 +8,7 @@ const InsertProperty = async (req, res, next) => {
   const img3 = Buffer.from(req.body.img3);
 
   var apartmentinfo = {
-    userId: req.body.userId,
+    apartmentId: req.body.apartmentId,
     Address: req.body.Address,
     ApartmentType: req.body.ApartmentType,
     Rent: req.body.Rent,
@@ -25,13 +24,12 @@ const InsertProperty = async (req, res, next) => {
   };
 
   try {
-    console.log("hello world");
     await conn.query(
-      "INSERT INTO apartmentinfo SET ?",
+      "UPDATE apartmentinfo SET ? WHERE apartmentId=" + req.body.apartmentId,
       apartmentinfo,
       function (error, results, fields) {
         if (error) {
-          // console.log(error);
+          console.log(error);
           res.json({
             status: false,
             message: "there are some errors with query!!!",
@@ -40,7 +38,7 @@ const InsertProperty = async (req, res, next) => {
         } else {
           res.json({
             status: true,
-            message: "Property Inserted registered sucessfully!! Great Work",
+            message: "property updated sucessfully!! Great Work",
             error: "",
           });
         }
@@ -51,5 +49,4 @@ const InsertProperty = async (req, res, next) => {
     res.json({ status: 412, error: err.array() });
   }
 };
-
-module.exports = InsertProperty;
+module.exports = UpdateProperty;
