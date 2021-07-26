@@ -20,4 +20,4 @@ const DeleteProperty = (req, res, next) => {
   });
 };
 
-module.exports = GetProperties;
+module.exports = DeleteProperty;
