@@ -19,9 +19,9 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.apartment_rental.ui.notifications.NotificationsFragment"
+        android:name="com.apartment_rental.ui.ViewFavouriteFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_view_favourite" />
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.apartment_rental.ui.ProfileFragment"

@@ -2,6 +2,7 @@ package com.apartment_rental.controller;
 
 import com.apartment_rental.model.AddApartment;
 import com.apartment_rental.model.Apartments;
+import com.apartment_rental.model.Favourite;
 import com.apartment_rental.model.LoginResponse;
 import com.apartment_rental.model.Register;
 
@@ -37,4 +38,13 @@ public interface UserService {
 
     @GET("getprop/")
     Call<Apartments> getAllApartments();
+
+    @POST("addtofav/")
+    @FormUrlEncoded
+    Call<AddApartment> LikeDisLike(@Field("apartmentId") int apartmentId,@Field("userId") int userId);
+
+
+    @POST("viewfav/")
+    @FormUrlEncoded
+    Call<Favourite> GetFavourite(@Field("userId") int userId);
 }

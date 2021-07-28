@@ -52,7 +52,9 @@ public class Datuap {
     @SerializedName("longitude")
     @Expose
     private double longitude;
-
+    @SerializedName("status")
+    @Expose
+    private Integer status;
     public Integer getApartmentId() {
         return apartmentId;
     }
@@ -172,5 +174,11 @@ public class Datuap {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+    public Integer getStatus() {
+        return status;
+    }
 
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 }

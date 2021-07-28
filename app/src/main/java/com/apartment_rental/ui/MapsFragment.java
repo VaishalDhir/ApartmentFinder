@@ -78,10 +78,8 @@ public class MapsFragment extends Fragment{
                                 for (int i = 0; i < apart.size(); i++) {
                                     int len=apart.get(i).getData().size();
                                       for (int j = i; j <=len-1 ; j+=1) {
-                                          LatLng latLng = new LatLng(apart.get(i).getData().get(j).getLatitude(), apart.get(i).getData().get(j).getLongitude());
-
-
-
+                                          LatLng latLng = new LatLng(apart.get(i).getData().get(j).getLatitude(),
+                                                  apart.get(i).getData().get(j).getLongitude());
                                           myMarker = googleMap.addMarker(new MarkerOptions().position(latLng).title(apart.get(i).getData().get(j).getApartmentType())
                                                   .snippet(apart.get(i).getData().get(j).getRent()+" C.A.D"));
 
@@ -118,19 +116,6 @@ public class MapsFragment extends Fragment{
                 System.out.println(ex.toString());
 
             }
-
-
-
-
-
-            // inside on map ready method
-            // we will be displaying all our markers.
-            // for adding markers we are running for loop and
-            // inside that we are drawing marker on our map.
-
-
-
-
         }
     };
 
@@ -235,6 +220,4 @@ public class MapsFragment extends Fragment{
                 break;
         }
     }
-
-
 }

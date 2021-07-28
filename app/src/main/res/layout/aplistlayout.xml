@@ -17,11 +17,29 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:id="@+id/apImage"
             />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/reldlike"
+                android:gravity="end">
+                <ImageView
+                    android:id="@+id/imagedlikeIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/dlike" />
+
+            </RelativeLayout>
+
+
+
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,7 +58,7 @@
                 android:layout_marginTop="3dp"
                 android:fontFamily="@font/montserrat"
                 android:textSize="13dp"
-android:textAlignment="center"
+                android:textAlignment="center"
                 android:background="#E4E4E4"
                 android:id="@+id/apRent"
                 android:textColor="@color/black_text"

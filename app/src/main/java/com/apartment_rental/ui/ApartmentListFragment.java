@@ -16,22 +16,15 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.apartment_rental.ApartmentListAdapter;
+import com.apartment_rental.Adapter.ApartmentListAdapter;
 import com.apartment_rental.R;
 import com.apartment_rental.controller.ApiUtils;
 import com.apartment_rental.controller.UserService;
 import com.apartment_rental.model.Apartments;
 import com.apartment_rental.model.Datuap;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.material.slider.LabelFormatter;
 import com.google.android.material.slider.RangeSlider;
-import com.google.android.material.slider.Slider;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.List;
 
 import retrofit2.Call;

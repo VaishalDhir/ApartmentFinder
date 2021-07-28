@@ -1,4 +1,4 @@
-package com.apartment_rental;
+package com.apartment_rental.Adapter;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -8,9 +8,11 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.apartment_rental.R;
+
 public class MyViewHolder extends RecyclerView.ViewHolder{
 
-    ImageView apartmentImage;
+    ImageView apartmentImage,disLikeBtn;
     TextView apartmentType,apartmentRent,apartmentFacility;
 
     CardView clickLayout;
@@ -22,6 +24,8 @@ public class MyViewHolder extends RecyclerView.ViewHolder{
         apartmentFacility=(TextView) itemView.findViewById(R.id.apFacility);
         apartmentImage=(ImageView) itemView.findViewById(R.id.apImage);
         clickLayout=(CardView) itemView.findViewById(R.id.card_view_inner);
+
+        disLikeBtn=(ImageView) itemView.findViewById(R.id.imagedlikeIcon);
 
     }
 }

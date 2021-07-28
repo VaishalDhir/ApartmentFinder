@@ -1,10 +1,9 @@
-package com.apartment_rental;
+package com.apartment_rental.Adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,24 +14,36 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.apartment_rental.R;
+import com.apartment_rental.SharedPref;
+import com.apartment_rental.controller.ApiUtils;
+import com.apartment_rental.controller.UserService;
+import com.apartment_rental.model.AddApartment;
 import com.apartment_rental.model.Datuap;
 import com.apartment_rental.model.Img1;
 import com.apartment_rental.model.Img2;
 import com.apartment_rental.model.Img3;
+import com.apartment_rental.ui.ApartmentListFragment;
 import com.apartment_rental.ui.ViewApartmentFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class ApartmentListAdapter extends RecyclerView.Adapter<MyViewHolder> {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class FavouriteAdapter extends RecyclerView.Adapter<MyViewHolder> {
     Context ctx;
     List<Datuap> apData;
     byte[] byteimg1,byteimg2,byteimg3;
     Bitmap bms;
+    UserService userServices;
 
-    public ApartmentListAdapter(Context ctx, List<Datuap> apData) {
+    public FavouriteAdapter(Context ctx, List<Datuap> apData) {
         this.ctx=ctx;
         this.apData=apData;
+        userServices = ApiUtils.getUserService();
+
     }
 
     @NonNull
@@ -46,7 +57,13 @@ public class ApartmentListAdapter extends RecyclerView.Adapter<MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final Datuap item = apData.get(position);
+        holder.disLikeBtn.setVisibility(View.GONE);
 
+//        if(item.getStatus()==0) {
+//            holder.disLikeBtn.setImageResource(R.drawable.dlike);
+//        }else{
+//            holder.disLikeBtn.setImageResource(R.drawable.like);
+//        }
         holder.apartmentRent.setText(item.getRent().toString());
         holder.apartmentType.setText(item.getApartmentType());
         holder.apartmentFacility.setText(item.getFacility());
@@ -68,7 +85,7 @@ public class ApartmentListAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
 
                 List<Integer> imgs=bmpis.getData();
-               byte[] byteimgs = new byte[imgs.size()];
+                byte[] byteimgs = new byte[imgs.size()];
                 for (int i = 0; i < imgs.size(); i++) {
                     byteimgs[i] = (byte) imgs.get(i).intValue();
                 }
@@ -102,6 +119,59 @@ public class ApartmentListAdapter extends RecyclerView.Adapter<MyViewHolder> {
                         .replace(R.id.nav_host_fragment, fragment).addToBackStack("view").commit();
             }
         });
+//
+//        holder.disLikeBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                try {
+//                    Call<AddApartment> call = userServices.LikeDisLike(item.getApartmentId(),uid);
+//                    call.enqueue(new Callback<AddApartment>() {
+//                        @Override
+//                        public void onResponse(Call<AddApartment> call, Response<AddApartment> response) {
+//                            if (response.isSuccessful()) {
+//
+//                                if (response.body().getStatus()) {
+//                                    if(item.getStatus()==0) {
+//                                        holder.disLikeBtn.setImageResource(R.drawable.like);
+//                                        Fragment fragment = new ApartmentListFragment();
+//                                        ((AppCompatActivity) ctx).getSupportFragmentManager()
+//                                                .beginTransaction()
+//                                                .replace(R.id.nav_host_fragment, fragment)
+//                                                .addToBackStack(fragment.getTag())
+//                                                .commit();
+//                                    }else{
+//                                        holder.disLikeBtn.setImageResource(R.drawable.dlike);
+//                                        Fragment fragment = new ApartmentListFragment();
+//                                        ((AppCompatActivity) ctx).getSupportFragmentManager()
+//                                                .beginTransaction()
+//                                                .replace(R.id.nav_host_fragment, fragment)
+//                                                .addToBackStack(fragment.getTag())
+//                                                .commit();
+//
+//                                    }
+//                                } else {
+//                                    System.out.println( response.body().getError());
+//                                }
+//                            } else {
+//                                System.out.println( "Error Error");
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<AddApartment> call, Throwable t) {
+//                            System.out.println("error");
+//                        }
+//                    });
+//                } catch (Exception ex) {
+//                    System.out.println(ex.toString());
+//
+//                }
+//            }
+//
+//        });
+
+
     }
 
     @Override
@@ -112,7 +182,6 @@ public class ApartmentListAdapter extends RecyclerView.Adapter<MyViewHolder> {
         // ByteArrayInputStream arrayInputStream = new ByteArrayInputStream(bytes);
         Bitmap bmsp = BitmapFactory.decodeByteArray(image, 0 ,image.length);
         return bmsp;
-
 
     }
 }
