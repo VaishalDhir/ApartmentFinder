@@ -68,14 +68,14 @@
             android:layout_height="wrap_content"
             android:stepSize="50"
             android:layout_below="@+id/txtrange"
-            android:value="200"
-            android:valueFrom="1000"
-            android:valueTo="5000"
+            android:valueFrom="1000.0"
+            android:valueTo="5000.0"
+            app:values="@array/rangeslider"
             app:haloColor="@android:color/holo_orange_light"
             app:thumbColor="@color/colorPrimaryDark"
             app:tickColor="@android:color/holo_red_dark"
             app:trackColor="@color/pale_orange"
-            app:values="@array/rangeslider" />
+          />
         </RelativeLayout>
 
         <RelativeLayout

@@ -121,57 +121,6 @@ public class FavouriteAdapter extends RecyclerView.Adapter<MyViewHolder> {
                         .replace(R.id.nav_host_fragment, fragment).addToBackStack("view").commit();
             }
         });
-//
-//        holder.disLikeBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                try {
-//                    Call<AddApartment> call = userServices.LikeDisLike(item.getApartmentId(),uid);
-//                    call.enqueue(new Callback<AddApartment>() {
-//                        @Override
-//                        public void onResponse(Call<AddApartment> call, Response<AddApartment> response) {
-//                            if (response.isSuccessful()) {
-//
-//                                if (response.body().getStatus()) {
-//                                    if(item.getStatus()==0) {
-//                                        holder.disLikeBtn.setImageResource(R.drawable.like);
-//                                        Fragment fragment = new ApartmentListFragment();
-//                                        ((AppCompatActivity) ctx).getSupportFragmentManager()
-//                                                .beginTransaction()
-//                                                .replace(R.id.nav_host_fragment, fragment)
-//                                                .addToBackStack(fragment.getTag())
-//                                                .commit();
-//                                    }else{
-//                                        holder.disLikeBtn.setImageResource(R.drawable.dlike);
-//                                        Fragment fragment = new ApartmentListFragment();
-//                                        ((AppCompatActivity) ctx).getSupportFragmentManager()
-//                                                .beginTransaction()
-//                                                .replace(R.id.nav_host_fragment, fragment)
-//                                                .addToBackStack(fragment.getTag())
-//                                                .commit();
-//
-//                                    }
-//                                } else {
-//                                    System.out.println( response.body().getError());
-//                                }
-//                            } else {
-//                                System.out.println( "Error Error");
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onFailure(Call<AddApartment> call, Throwable t) {
-//                            System.out.println("error");
-//                        }
-//                    });
-//                } catch (Exception ex) {
-//                    System.out.println(ex.toString());
-//
-//                }
-//            }
-//
-//        });
 
 
     }

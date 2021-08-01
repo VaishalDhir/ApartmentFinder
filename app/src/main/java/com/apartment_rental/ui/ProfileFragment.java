@@ -28,7 +28,6 @@ public class ProfileFragment extends Fragment {
         Button loginPage=(Button) vw.findViewById(R.id.loginPagebtn);
         Button registerPage=(Button) vw.findViewById(R.id.registeraccountbtn);
         Button addPropertyPage=(Button) vw.findViewById(R.id.addPropertybtn);
-        Button updateProfilePage=(Button) vw.findViewById(R.id.updateprofilebtn);
         Button ViewPropertyPage=(Button) vw.findViewById(R.id.viewpropbtn);
         Button SignOut=(Button) vw.findViewById(R.id.signout);
         TextView helloText=(TextView) vw.findViewById(R.id.hellotext);
@@ -45,7 +44,6 @@ public class ProfileFragment extends Fragment {
             relativeLay2.setVisibility(View.VISIBLE);
             addPropertyPage.setVisibility(View.GONE);
             ViewPropertyPage.setVisibility(View.GONE);
-            updateProfilePage.setVisibility(View.GONE);
             helloText.setText("Hello "+shrd.getFirstname()+"...");
         }else  {
             relativeLay1.setVisibility(View.VISIBLE);
@@ -72,16 +70,12 @@ public class ProfileFragment extends Fragment {
                 loadFragment(getContext(),frag);
             }
         });
-       updateProfilePage.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
 
-           }
-       });
        ViewPropertyPage.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-
+               Fragment frag=new ViewRenterListFragment();
+               loadFragment(getContext(),frag);
            }
        });
 

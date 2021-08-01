@@ -1,6 +1,7 @@
 package com.apartment_rental.ui;
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,10 +20,13 @@ import android.widget.Toast;
 import com.apartment_rental.Adapter.ApartmentListAdapter;
 import com.apartment_rental.R;
 import com.apartment_rental.controller.ApiUtils;
+import com.apartment_rental.controller.SwipeHelper;
 import com.apartment_rental.controller.UserService;
 import com.apartment_rental.model.Apartments;
 import com.apartment_rental.model.Datuap;
+import com.google.android.material.slider.LabelFormatter;
 import com.google.android.material.slider.RangeSlider;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +44,7 @@ public class ApartmentListFragment extends Fragment {
     RecyclerView listOfApartment;
     int count=0;
 
-
+    ApartmentListAdapter aptList;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,13 +59,15 @@ public class ApartmentListFragment extends Fragment {
         listOfApartment.addItemDecoration(new DividerItemDecoration(listOfApartment.getContext(), DividerItemDecoration.VERTICAL));
 
         userServices = ApiUtils.getUserService();
+
+        getData(val1,val2);
+
         progress=new ProgressDialog(getActivity());
         progress.setMessage("Loading");
         progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progress.setIndeterminate(true);
         progress.setProgress(0);
         progress.show();
-        getData(val1,val2);
 
         rangeSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {
             @Override
@@ -90,6 +96,14 @@ public class ApartmentListFragment extends Fragment {
                 filterRel.setVisibility(View.VISIBLE);
             }
         });
+
+
+//
+//
+
+
+
+
         return view;
     }
 
@@ -108,15 +122,17 @@ public class ApartmentListFragment extends Fragment {
                                 int len=apart.get(i).getData().size();
                                 apData.clear();
                                 for (int j = i; j <=len-1 ; j++) {
+                                    progress.dismiss();
+
                                     int rent=apart.get(i).getData().get(j).getRent();
                                     int filterval1=Math.round(value1);
                                     int filterval2=Math.round(value2);
                                     if(rent>filterval1 && rent<filterval2){
-                                        progress.dismiss();
                                         apData.add(apart.get(i).getData().get(j));
                                         System.out.println("size----------"+apData.size());
-                                        ApartmentListAdapter aptList=new ApartmentListAdapter(getActivity(),apData);
+                                         aptList=new ApartmentListAdapter(getActivity(),apData);
                                         listOfApartment.setAdapter(aptList);
+
                                     }
                                 }
                             }

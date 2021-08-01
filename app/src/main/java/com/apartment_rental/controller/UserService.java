@@ -47,4 +47,14 @@ public interface UserService {
     @POST("viewfav/")
     @FormUrlEncoded
     Call<Favourite> GetFavourite(@Field("userId") int userId);
+
+    @POST("getrenterprop")
+    @FormUrlEncoded
+    Call<Apartments> getRenterProp(@Field("userId") int userId);
+
+
+    @POST("deleteprop/")
+    @FormUrlEncoded
+    Call<AddApartment> DeleteApt(@Field("apartmentId") int apartmentId);
+
 }
