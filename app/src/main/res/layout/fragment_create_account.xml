@@ -95,10 +95,49 @@
             android:fontFamily="@font/montserrat"
             android:inputType="number"
             android:id="@+id/contact_ed"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/contact_ed"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="35dp"
+            android:weightSum="1"
+           android:gravity="center"
+            android:orientation="horizontal"
+            android:id="@+id/radioGroup_cat">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tenant"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/pale_orange"
+                android:id="@+id/radioButton_tenant"
+                android:checked="true"
+                android:layout_gravity="center_horizontal"
+                android:textSize="25dp" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Owner"
+                android:textColor="@color/pale_orange"
+                android:fontFamily="@font/montserrat"
+                android:id="@+id/radioButton2_renter"
+                android:layout_gravity="center_horizontal"
+                android:checked="false"
+                android:textSize="25dp"
+                android:layout_weight="0.13" />
+
+        </RadioGroup>
+
+
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_below="@id/contact_ed"
+            android:layout_below="@id/radioGroup_cat"
             android:inputType="textPassword"
             android:layout_marginTop="30dp"
             android:background="@drawable/edbackground"

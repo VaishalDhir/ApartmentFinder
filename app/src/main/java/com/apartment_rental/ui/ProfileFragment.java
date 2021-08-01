@@ -36,11 +36,18 @@ public class ProfileFragment extends Fragment {
         RelativeLayout relativeLay2=(RelativeLayout) vw.findViewById(R.id.rel2);
 
         SharedPref shrd=new SharedPref(getActivity());
-        if(!(shrd.getFirstname().equals(""))){
+        if(shrd.getType().equals("renter")){
             relativeLay1.setVisibility(View.GONE);
             relativeLay2.setVisibility(View.VISIBLE);
             helloText.setText("Hello "+shrd.getFirstname()+"...");
-        }else {
+        }else if(shrd.getType().equals("user")){
+            relativeLay1.setVisibility(View.GONE);
+            relativeLay2.setVisibility(View.VISIBLE);
+            addPropertyPage.setVisibility(View.GONE);
+            ViewPropertyPage.setVisibility(View.GONE);
+            updateProfilePage.setVisibility(View.GONE);
+            helloText.setText("Hello "+shrd.getFirstname()+"...");
+        }else  {
             relativeLay1.setVisibility(View.VISIBLE);
             relativeLay2.setVisibility(View.GONE);
         }

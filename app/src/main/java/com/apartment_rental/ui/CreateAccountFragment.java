@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +41,8 @@ public class CreateAccountFragment extends Fragment {
         EditText ContactEd=(EditText) view.findViewById(R.id.contact_ed);
         EditText emailIdEd=(EditText) view.findViewById(R.id.emailid_ed);
         EditText passwordEd=(EditText) view.findViewById(R.id.createpassword_ed);
+        RadioGroup type = (RadioGroup) view.findViewById(R.id.radioGroup_cat);
+
         EditText confirmPasswordEd=(EditText) view.findViewById(R.id.confirm_ed);
         RelativeLayout createAccount=(RelativeLayout) view.findViewById(R.id.rel_create);
         userServices = ApiUtils.getUserService();
@@ -52,17 +56,27 @@ public class CreateAccountFragment extends Fragment {
                 String emaidIdtext=emailIdEd.getText().toString();
                 String passwordText=passwordEd.getText().toString();
                 String confirmPass=confirmPasswordEd.getText().toString();
+                int selectedId = type.getCheckedRadioButtonId();
+                RadioButton radioButton = (RadioButton) view.findViewById(selectedId);
+
                 if (validateLogin(first,last,emaidIdtext,contactnum,passwordText,confirmPass)) {
-                    registerUser(first,last,emaidIdtext,contactnum,passwordText);
+                    registerUser(first,last,emaidIdtext,contactnum,passwordText,radioButton.getText().toString());
                 }
             }
         });
         return view;
     }
 
-    private void registerUser(String first, String last, String emaidIdtext, String contactnum, String passwordText)  {
+    private void registerUser(String first, String last, String emaidIdtext, String contactnum, String passwordText,String type)  {
         try {
-            Call<Register> call = userServices.userRegister(first,last,emaidIdtext,contactnum,passwordText,"renter");
+            if(type.equals("tenant")){
+                type="renter";
+            }else{
+                type="user";
+
+            }
+
+            Call<Register> call = userServices.userRegister(first,last,emaidIdtext,contactnum,passwordText,type);
             call.enqueue(new Callback<Register>() {
                 @Override
                 public void onResponse(Call<Register> call, Response<Register> response) {

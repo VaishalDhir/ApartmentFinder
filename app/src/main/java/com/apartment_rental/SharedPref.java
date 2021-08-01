@@ -12,6 +12,8 @@ public class SharedPref {
     private static final String ISLOGIN="firstname";
     private static final String CONTACTNUMBER="firstname";
     private static final String USERID="userid";
+    private static final String USERTYPE="type";
+
 
 
     public SharedPref(Context con)
@@ -60,6 +62,20 @@ public class SharedPref {
 
 
     }
+
+
+
+    public void setType(String type){
+        editor.putString(USERTYPE,type);
+        editor.commit();
+    }
+    public String getType(){
+        return sharedPref.getString(USERTYPE,"");
+
+
+    }
+
+
 //
 //    public void setIslogin(boolean isFirstTime) {
 //        editor.putBoolean(ISLOGIN, isFirstTime);
@@ -72,6 +88,8 @@ public class SharedPref {
 
     public  void clearPreferences(){
         setFirstname("");
+        setUserId(0);
+        setType("");
         //setIslogin(false);
 
     }
