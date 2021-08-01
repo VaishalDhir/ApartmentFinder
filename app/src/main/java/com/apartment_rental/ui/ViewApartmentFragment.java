@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.PagerAdapter;
@@ -14,6 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -40,12 +42,14 @@ public class ViewApartmentFragment extends Fragment {
         TextView vapAddress=(TextView) vw.findViewById(R.id.vapAddress);
         TextView vapType=(TextView) vw.findViewById(R.id.vapType);
         TextView vapDesc=(TextView) vw.findViewById(R.id.vapdiscription);
+        ImageView backBtnImg=(ImageView) vw.findViewById(R.id.backbtn);
         Bundle bundle = this.getArguments();
 
         String Type = bundle.getString("atype");
         String RenterType = bundle.getString("renter");
         String Description = bundle.getString("description");
         String Address = bundle.getString("address");
+        String screenType = bundle.getString("displaystatus");
         String Size=bundle.getString("size");
         int Rent=bundle.getInt("rent");
         byte[] img1=bundle.getByteArray("img1");
@@ -69,6 +73,36 @@ public class ViewApartmentFragment extends Fragment {
         vapAddress.setText(Address);
         vapType.setText(Type);
         vapDesc.setText(Description);
+
+
+
+        backBtnImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(screenType.equals("map")){
+                    Fragment fragment = new MapsFragment();
+                    ((AppCompatActivity) getActivity()).getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.nav_host_fragment, fragment)
+                            .addToBackStack(fragment.getTag())
+                            .commit();
+                }else  if(screenType.equals("list")){
+                    Fragment fragment = new ApartmentListFragment();
+                    ((AppCompatActivity) getActivity()).getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.nav_host_fragment, fragment)
+                            .addToBackStack(fragment.getTag())
+                            .commit();
+                }else{
+                    Fragment fragment = new ViewFavouriteFragment();
+                    ((AppCompatActivity) getActivity()).getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.nav_host_fragment, fragment)
+                            .addToBackStack(fragment.getTag())
+                            .commit();
+                }
+            }
+        });
         return vw;
     }
 

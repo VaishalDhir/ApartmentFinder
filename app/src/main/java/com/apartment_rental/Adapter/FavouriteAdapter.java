@@ -111,6 +111,8 @@ public class FavouriteAdapter extends RecyclerView.Adapter<MyViewHolder> {
                 bundle.putString("size", item.getSize());
                 bundle.putInt("rent", item.getRent());
                 bundle.putString("description", item.getDescription());
+                bundle.putString("displaystatus", "fav");
+
                 bundle.putByteArray("img1", byteimgs);
                 bundle.putByteArray("img2",byteimg2);
                 bundle.putByteArray("img3", byteimg3);

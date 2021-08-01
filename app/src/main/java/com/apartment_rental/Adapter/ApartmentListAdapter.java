@@ -112,6 +112,7 @@ public class ApartmentListAdapter extends RecyclerView.Adapter<MyViewHolder> {
                 bundle.putString("address", item.getAddress());
                 bundle.putString("size", item.getSize());
                 bundle.putInt("rent", item.getRent());
+                bundle.putString("displaystatus", "list");
                 bundle.putString("description", item.getDescription());
                 bundle.putByteArray("img1", byteimgs);
                 bundle.putByteArray("img2",byteimg2);
