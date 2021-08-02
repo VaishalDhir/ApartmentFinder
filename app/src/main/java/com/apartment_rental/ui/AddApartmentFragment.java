@@ -2,6 +2,7 @@ package com.apartment_rental.ui;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -75,6 +76,7 @@ public class AddApartmentFragment extends Fragment implements LocationListener {
     UserService userServices;
     byte[] imgarr1, imgarr2, imgsarr3;
     double lat, lang;
+    private ProgressDialog progress;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -168,6 +170,12 @@ public class AddApartmentFragment extends Fragment implements LocationListener {
                 RadioButton radioButton = (RadioButton) view.findViewById(selectedId);
 
                 if (validateApartment(ApartType, ApartAddress, Rent, Size, ApartDesc_ed, facility)) {
+                    progress=new ProgressDialog(getActivity());
+                    progress.setMessage("Loading");
+                    progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                    progress.setIndeterminate(true);
+                    progress.setProgress(0);
+                    progress.show();
                     AddProperty(ApartType, ApartAddress, Rent, Size, ApartDesc_ed, facility, radioButton.getText().toString());
                 }
             }
@@ -215,6 +223,7 @@ public class AddApartmentFragment extends Fragment implements LocationListener {
                     if (response.isSuccessful()) {
 
                         if (response.body().getStatus()) {
+                            progress.dismiss();
                             Fragment fragment = new ProfileFragment();
                             ((AppCompatActivity) getActivity()).getSupportFragmentManager()
                                     .beginTransaction()

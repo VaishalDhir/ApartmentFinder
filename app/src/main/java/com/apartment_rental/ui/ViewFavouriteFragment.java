@@ -36,6 +36,7 @@ public class ViewFavouriteFragment extends Fragment {
     List<Apartments> apart=new ArrayList<>();
     List<Datuap> apData=new ArrayList<>();
     List<Datuap> favApData=new ArrayList<>();
+    List<Favourite> fav=new ArrayList<>();
 
     private ProgressDialog progress;
         RecyclerView lisRecyclerView;
@@ -110,13 +111,19 @@ public class ViewFavouriteFragment extends Fragment {
                     if (response.isSuccessful()) {
 
                         if(response.body().getStatus()){
+                            progress.dismiss();
+                            int len=response.body().getData().size();
+                            System.out.println(len);
+                            fav.add(response.body());
+                            for(int i=0;i<1;i++){
+                                int lent=fav.get(i).getData().size();
+                                for (int j = i; j <=lent-1 ; j++) {
 
-                            for(int i=0;i<response.body().getData().size();i++){
-                               if(response.body().getData().get(i).getApartmentId()==apData.get(i).getApartmentId()){
-                                   progress.dismiss();
-                                   favApData.add(apData.get(i));
-                                   FavouriteAdapter aptList=new FavouriteAdapter(getActivity(),favApData);
-                                   lisRecyclerView.setAdapter(aptList);
+
+                                    favApData.add(apData.get(j));
+                                        FavouriteAdapter aptList = new FavouriteAdapter(getActivity(), favApData);
+                                        lisRecyclerView.setAdapter(aptList);
+
 
                                }
                             }

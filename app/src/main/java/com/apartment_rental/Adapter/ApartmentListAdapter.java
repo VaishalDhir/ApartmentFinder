@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,12 +21,14 @@ import com.apartment_rental.controller.ApiUtils;
 import com.apartment_rental.controller.UserService;
 import com.apartment_rental.model.AddApartment;
 import com.apartment_rental.model.Datuap;
+import com.apartment_rental.model.Favourite;
 import com.apartment_rental.model.Img1;
 import com.apartment_rental.model.Img2;
 import com.apartment_rental.model.Img3;
 import com.apartment_rental.ui.ApartmentListFragment;
 import com.apartment_rental.ui.ViewApartmentFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -60,12 +63,69 @@ public class ApartmentListAdapter extends RecyclerView.Adapter<MyViewHolder> {
         SharedPref shrd = new SharedPref(ctx);
         int uid = shrd.getUserid();
 
-        if(item.getStatus()==0) {
-            holder.disLikeBtn.setImageResource(R.drawable.dlike);
-        }else{
-            holder.disLikeBtn.setImageResource(R.drawable.like);
+//        if(item.getStatus()==0) {
+//            holder.disLikeBtn.setImageResource(R.drawable.dlike);
+//        }else{
+//            holder.disLikeBtn.setImageResource(R.drawable.like);
+//
+//        }
 
-        }
+
+
+//
+//
+//
+//        try {
+//            Call<Favourite> call=userServices.GetFavourite(uid);
+//            call.enqueue(new Callback<Favourite>() {
+//                @Override
+//                public void onResponse(Call<Favourite> call, Response<Favourite> response) {
+//                    if (response.isSuccessful()) {
+//
+//                        if(response.body().getStatus()){
+//                            List<Favourite> fav=new ArrayList<>();
+//
+//                            int len=response.body().getData().size();
+//                            System.out.println(len);
+//                            fav.add(response.body());
+//                            for(int i=0;i<1;i++){
+//                                int lent=fav.get(i).getData().size();
+//                                for (int j = i; j <=lent-1 ; j++) {
+//
+//                                if(apData.get(j).getApartmentId()==item.getApartmentId()) {
+//                                    holder.disLikeBtn.setImageResource(R.drawable.dlike);
+//                                }else{
+//                                    holder.disLikeBtn.setImageResource(R.drawable.like);
+//
+//                                }
+//
+//
+//
+//                                }
+//                            }
+//                        }
+//                    } else {
+//                        Toast.makeText(ctx, "Error! Please try again!", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//                @Override
+//                public void onFailure(Call<Favourite> call, Throwable t) {
+//                    System.out.println("error");
+//                }
+//            });
+//        }catch (Exception ex){
+//            System.out.println(ex.toString());
+//        }
+//
+//
+//
+//
+
+
+
+
+
+
         holder.apartmentRent.setText(item.getRent().toString());
         holder.apartmentType.setText(item.getApartmentType());
         holder.apartmentFacility.setText(item.getFacility());
@@ -135,7 +195,7 @@ public class ApartmentListAdapter extends RecyclerView.Adapter<MyViewHolder> {
                             if (response.isSuccessful()) {
 
                                 if (response.body().getStatus()) {
-                                    if(item.getStatus()==0) {
+                                    if(response.body().getMessage().equals("Apartment Added to Your Favourite")) {
                                     holder.disLikeBtn.setImageResource(R.drawable.like);
                                         Fragment fragment = new ApartmentListFragment();
                                         ((AppCompatActivity) ctx).getSupportFragmentManager()
