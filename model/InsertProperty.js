@@ -31,7 +31,7 @@ const InsertProperty = async (req, res, next) => {
       apartmentinfo,
       function (error, results, fields) {
         if (error) {
-          // console.log(error);
+          console.log(error);
           res.json({
             status: false,
             message: "there are some errors with query!!!",

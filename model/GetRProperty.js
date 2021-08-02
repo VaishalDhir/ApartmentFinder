@@ -3,8 +3,8 @@ const conn = require("../config/db");
 
 const GetRProperty = (req, res, next) => {
   conn.query(
-    "SELECT * FROM apartmentinfo WHERE apartmentId=?",
-    req.body.apartmentId,
+    "SELECT * FROM apartmentinfo WHERE userid=?",
+    req.body.userId,
     function (err, data, fields) {
       if (err) {
         res.json({

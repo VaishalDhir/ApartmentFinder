@@ -2,7 +2,7 @@ const conn = require("../config/db");
 
 const viewFav = (req, res, next) => {
   conn.query(
-    "SELECT * FROM favouriteapt WHERE apartmentId=" + req.body.apartmentId,
+    "SELECT * FROM favouriteapt WHERE userId=" + req.body.userId,
     function (err, data, fields) {
       if (err) {
         res.json({
