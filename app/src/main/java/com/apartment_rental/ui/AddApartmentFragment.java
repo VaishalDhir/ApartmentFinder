@@ -50,6 +50,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -222,27 +223,47 @@ public class AddApartmentFragment extends Fragment implements LocationListener {
 
                         if (response.body().getStatus()) {
                             progress.dismiss();
-                            Fragment fragment = new ProfileFragment();
-                            ((AppCompatActivity) getActivity()).getSupportFragmentManager()
-                                    .beginTransaction()
-                                    .replace(R.id.nav_host_fragment, fragment)
-                                    .addToBackStack(fragment.getTag())
-                                    .commit();
+                            new MaterialAlertDialogBuilder(getActivity()).setMessage(response.body().getMessage())
+                                    .setPositiveButton("OK",(dialog, which) -> {
+                                        Fragment fragment = new ProfileFragment();
+                                        ((AppCompatActivity) getActivity()).getSupportFragmentManager()
+                                                .beginTransaction()
+                                                .replace(R.id.nav_host_fragment, fragment)
+                                                .addToBackStack(fragment.getTag())
+                                                .commit();
+                                    }).show();
+
                         } else {
-                            Toast.makeText(getContext(), response.body().getError(), Toast.LENGTH_SHORT).show();
+                            progress.dismiss();
+                            new MaterialAlertDialogBuilder(getActivity()).setMessage(response.body().getError())
+                                    .setPositiveButton("OK",(dialog, which) -> {
+///
+                                    }).show();
                         }
                     } else {
-                        Toast.makeText(getContext(), "Error! Please try again!", Toast.LENGTH_SHORT).show();
+                        progress.dismiss();
+                        new MaterialAlertDialogBuilder(getActivity()).setMessage("Error! Please try again!")
+                                .setPositiveButton("OK",(dialog, which) -> {
+                                   /////
+                                }).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<AddApartment> call, Throwable t) {
-                    System.out.println("error");
+                    progress.dismiss();
+                    new MaterialAlertDialogBuilder(getActivity()).setMessage("Error! Please try again!")
+                            .setPositiveButton("OK",(dialog, which) -> {
+                                /////
+                            }).show();
                 }
             });
         } catch (Exception ex) {
-            System.out.println(ex.toString());
+            progress.dismiss();
+            new MaterialAlertDialogBuilder(getActivity()).setMessage(ex.toString())
+                    .setPositiveButton("OK",(dialog, which) -> {
+                        /////
+                    }).show();
 
         }
     }

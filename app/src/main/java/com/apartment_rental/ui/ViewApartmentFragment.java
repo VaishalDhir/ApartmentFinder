@@ -27,6 +27,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apartment_rental.R;
+import com.apartment_rental.SharedPref;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +37,7 @@ import java.util.Objects;
 
 public class ViewApartmentFragment extends Fragment {
 
+    SharedPref shrdd;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,7 +56,7 @@ public class ViewApartmentFragment extends Fragment {
         ImageView backBtnImg=(ImageView) vw.findViewById(R.id.backbtn);
         Button contact_person=(Button) vw.findViewById(R.id.contact_person);
         Bundle bundle = this.getArguments();
-
+        shrdd=new SharedPref(getActivity());
         String Type = bundle.getString("atype");
         String RenterType = bundle.getString("renter");
         String Description = bundle.getString("description");
@@ -86,7 +89,19 @@ public class ViewApartmentFragment extends Fragment {
         contact_person.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             //   sendSMS("+15149636316", "Hello world");
+                if(shrdd.getUserid()!=0) {
+                    //   sendSMS("+15149636316", "Hello world");
+                }else{
+                    new MaterialAlertDialogBuilder(getActivity()).setMessage("You need to Sign in First")
+                            .setPositiveButton("OK",(dialog, which) -> {
+                                Fragment fragment = new LoginFragment();
+                                ((AppCompatActivity) getActivity()).getSupportFragmentManager()
+                                        .beginTransaction()
+                                        .replace(R.id.nav_host_fragment, fragment)
+                                        .addToBackStack(fragment.getTag())
+                                        .commit();
+                            }).show();
+                }
             }
         });
 

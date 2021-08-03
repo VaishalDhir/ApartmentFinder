@@ -19,6 +19,7 @@ import com.apartment_rental.controller.ApiUtils;
 import com.apartment_rental.controller.UserService;
 import com.apartment_rental.model.LoginResponse;
 import com.apartment_rental.model.Register;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -66,18 +67,28 @@ public class ResetPasswordFragment extends Fragment {
                     if (response.isSuccessful()) {
 
                         if(response.body().getStatus()){
+                            new MaterialAlertDialogBuilder(getActivity()).setMessage("Password Reset Successfully")
+                                    .setPositiveButton("OK",(dialog, which) -> {
+                                        Fragment fragment = new LoginFragment();
+                                        ((AppCompatActivity) getActivity()).getSupportFragmentManager()
+                                                .beginTransaction()
+                                                .replace(R.id.nav_host_fragment, fragment)
+                                                .addToBackStack(fragment.getTag())
+                                                .commit();
+                                    }).show();
 
-                            Fragment fragment = new LoginFragment();
-                            ((AppCompatActivity) getActivity()).getSupportFragmentManager()
-                                    .beginTransaction()
-                                    .replace(R.id.nav_host_fragment, fragment)
-                                    .addToBackStack(fragment.getTag())
-                                    .commit();
                         }else {
-                            Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            new MaterialAlertDialogBuilder(getActivity()).setMessage(response.body().getMessage())
+                                    .setPositiveButton("OK",(dialog, which) -> {
+
+                                    }).show();
                         }
                     } else {
-                        Toast.makeText(getContext(), "Error! Please try again!", Toast.LENGTH_SHORT).show();
+                        new MaterialAlertDialogBuilder(getActivity()).setMessage("Error! Please try again!")
+                                .setPositiveButton("OK",(dialog, which) -> {
+
+                                }).show();
+
                     }
                 }
 

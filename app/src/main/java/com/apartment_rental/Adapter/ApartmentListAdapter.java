@@ -26,7 +26,10 @@ import com.apartment_rental.model.Img1;
 import com.apartment_rental.model.Img2;
 import com.apartment_rental.model.Img3;
 import com.apartment_rental.ui.ApartmentListFragment;
+import com.apartment_rental.ui.LoginFragment;
+import com.apartment_rental.ui.ProfileFragment;
 import com.apartment_rental.ui.ViewApartmentFragment;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,14 +44,11 @@ public class ApartmentListAdapter extends RecyclerView.Adapter<MyViewHolder> {
     byte[] byteimg1,byteimg2,byteimg3;
     Bitmap bms;
     UserService userServices;
-
     public ApartmentListAdapter(Context ctx, List<Datuap> apData) {
         this.ctx=ctx;
         this.apData=apData;
         userServices = ApiUtils.getUserService();
-
     }
-
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -56,20 +56,11 @@ public class ApartmentListAdapter extends RecyclerView.Adapter<MyViewHolder> {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.aplistlayout,parent,false);
         return new MyViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final Datuap item = apData.get(position);
         SharedPref shrd = new SharedPref(ctx);
         int uid = shrd.getUserid();
-
-//        if(item.getStatus()==0) {
-//            holder.disLikeBtn.setImageResource(R.drawable.dlike);
-//        }else{
-//            holder.disLikeBtn.setImageResource(R.drawable.like);
-//
-//        }
-
         try {
             List<Favourite> fav=new ArrayList<>();
 
@@ -90,13 +81,9 @@ public class ApartmentListAdapter extends RecyclerView.Adapter<MyViewHolder> {
                                         for (int k = 0; k <= apData.size() - 1; k++) {
                                             if (fav.get(i).getData().get(j).getApartmentId() == item.getApartmentId()) {
                                                 holder.disLikeBtn.setImageResource(R.drawable.like);
-//                                                favApData.add(apData.get(k));
-//                                                FavouriteAdapter aptList = new FavouriteAdapter(getActivity(), favApData);
-//                                                lisRecyclerView.setAdapter(aptList);
                                             }
                                         }
                                     }
-
                                 }
                             }else{
                                 System.out.println("No Data");
@@ -114,35 +101,26 @@ public class ApartmentListAdapter extends RecyclerView.Adapter<MyViewHolder> {
         }catch (Exception ex){
             System.out.println(ex.toString());
         }
-
-
-
         holder.apartmentRent.setText(item.getRent().toString());
         holder.apartmentType.setText(item.getApartmentType());
         holder.apartmentFacility.setText(item.getFacility());
         Img1 bmpi1=item.getImg1();
-
-
         List<Integer> img1=bmpi1.getData();
         byteimg1 = new byte[img1.size()];
         for (int i = 0; i < img1.size(); i++) {
             byteimg1[i] = (byte) img1.get(i).intValue();
         }
-
         bms=getImage(byteimg1);
         holder.apartmentImage.setImageBitmap(bms);
         holder.clickLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Img1 bmpis=item.getImg1();
-
-
                 List<Integer> imgs=bmpis.getData();
-               byte[] byteimgs = new byte[imgs.size()];
+                byte[] byteimgs = new byte[imgs.size()];
                 for (int i = 0; i < imgs.size(); i++) {
                     byteimgs[i] = (byte) imgs.get(i).intValue();
                 }
-
                 Img2 bmpi2=item.getImg2();
                 List<Integer> img2=bmpi2.getData();
                 byteimg2 = new byte[img2.size()];
@@ -150,7 +128,6 @@ public class ApartmentListAdapter extends RecyclerView.Adapter<MyViewHolder> {
                     byteimg2[i] = (byte) img2.get(i).intValue();
                 }
                 Img3 bmpi3=item.getImg3();
-
                 List<Integer> img3=bmpi3.getData();
                 byteimg3 = new byte[img3.size()];
                 for (int i = 0; i < img3.size(); i++) {
@@ -175,67 +152,74 @@ public class ApartmentListAdapter extends RecyclerView.Adapter<MyViewHolder> {
         });
 
         holder.disLikeBtn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-
                 try {
-                    Call<AddApartment> call = userServices.LikeDisLike(item.getApartmentId(),uid);
-                    call.enqueue(new Callback<AddApartment>() {
-                        @Override
-                        public void onResponse(Call<AddApartment> call, Response<AddApartment> response) {
-                            if (response.isSuccessful()) {
+                    if (shrd.getUserid() != 0) {
+                        Call<AddApartment> call = userServices.LikeDisLike(item.getApartmentId(), uid);
+                        call.enqueue(new Callback<AddApartment>() {
+                            @Override
+                            public void onResponse(Call<AddApartment> call, Response<AddApartment> response) {
+                                if (response.isSuccessful()) {
 
-                                if (response.body().getStatus()) {
-                                    if(response.body().getMessage().equals("Apartment Added to Your Favourite")) {
-                                    holder.disLikeBtn.setImageResource(R.drawable.like);
-                                        Fragment fragment = new ApartmentListFragment();
-                                        ((AppCompatActivity) ctx).getSupportFragmentManager()
-                                                .beginTransaction()
-                                                .replace(R.id.nav_host_fragment, fragment)
-                                                .addToBackStack(fragment.getTag())
-                                                .commit();
-                                    }else{
-                                        holder.disLikeBtn.setImageResource(R.drawable.dlike);
-                                        Fragment fragment = new ApartmentListFragment();
-                                        ((AppCompatActivity) ctx).getSupportFragmentManager()
-                                                .beginTransaction()
-                                                .replace(R.id.nav_host_fragment, fragment)
-                                                .addToBackStack(fragment.getTag())
-                                                .commit();
-
+                                    if (response.body().getStatus()) {
+                                        if (response.body().getMessage().equals("Apartment Added to Your Favourite")) {
+                                            holder.disLikeBtn.setImageResource(R.drawable.like);
+                                            Fragment fragment = new ApartmentListFragment();
+                                            ((AppCompatActivity) ctx).getSupportFragmentManager()
+                                                    .beginTransaction()
+                                                    .replace(R.id.nav_host_fragment, fragment)
+                                                    .addToBackStack(fragment.getTag())
+                                                    .commit();
+                                        } else {
+                                            holder.disLikeBtn.setImageResource(R.drawable.dlike);
+                                            Fragment fragment = new ApartmentListFragment();
+                                            ((AppCompatActivity) ctx).getSupportFragmentManager()
+                                                    .beginTransaction()
+                                                    .replace(R.id.nav_host_fragment, fragment)
+                                                    .addToBackStack(fragment.getTag())
+                                                    .commit();
+                                        }
+                                    } else {
+                                        System.out.println(response.body().getError());
                                     }
                                 } else {
-                                    System.out.println( response.body().getError());
+                                    new MaterialAlertDialogBuilder(ctx).setMessage("There is some error")
+                                            .setPositiveButton("OK",(dialog, which) -> {
+
+                                            }).show();
                                 }
-                            } else {
-                                System.out.println( "Error Error");
                             }
-                        }
 
-                        @Override
-                        public void onFailure(Call<AddApartment> call, Throwable t) {
-                            System.out.println("error");
-                        }
-                    });
-                } catch (Exception ex) {
+                            @Override
+                            public void onFailure(Call<AddApartment> call, Throwable t) {
+                                System.out.println("error");
+                            }
+                        });
+                    }else{
+                        new MaterialAlertDialogBuilder(ctx).setMessage("You need to Sign in First")
+                                .setPositiveButton("OK",(dialog, which) -> {
+                                    Fragment fragment = new LoginFragment();
+                                    ((AppCompatActivity) ctx).getSupportFragmentManager()
+                                            .beginTransaction()
+                                            .replace(R.id.nav_host_fragment, fragment)
+                                            .addToBackStack(fragment.getTag())
+                                            .commit();
+                                }).show();
+                    }
+                }catch (Exception ex) {
                     System.out.println(ex.toString());
-
                 }
             }
-
         });
-
-
     }
-
     @Override
     public int getItemCount() {
         return apData.size();
     }
     public Bitmap getImage(byte[] image) {
-        // ByteArrayInputStream arrayInputStream = new ByteArrayInputStream(bytes);
         Bitmap bmsp = BitmapFactory.decodeByteArray(image, 0 ,image.length);
         return bmsp;
-
     }
 }

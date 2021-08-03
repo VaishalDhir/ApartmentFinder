@@ -19,6 +19,7 @@ import com.apartment_rental.controller.ApiUtils;
 import com.apartment_rental.controller.UserService;
 import com.apartment_rental.model.LoginPojo;
 import com.apartment_rental.model.LoginResponse;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -76,33 +77,53 @@ public class LoginFragment extends Fragment {
                     if (response.isSuccessful()) {
 
                             if(response.body().getSuccess()){
-                                SharedPref shrd=new SharedPref(getActivity());
-                           //     shrd.setIslogin(true);
-                                shrd.setFirstname(response.body().getData().get(0).getFirstname());
-                                shrd.setUserId(response.body().getData().get(0).getUserid());
-                                shrd.setType(response.body().getData().get(0).getType());
-                                shrd.setUserphnum(response.body().getData().get(0).getContact());
-                            Fragment fragment = new ProfileFragment();
-                            ((AppCompatActivity) getActivity()).getSupportFragmentManager()
-                                    .beginTransaction()
-                                    .replace(R.id.nav_host_fragment, fragment)
-                                    .addToBackStack(fragment.getTag())
-                                    .commit();
+                              new MaterialAlertDialogBuilder(getContext()).setMessage("Login Successfull")
+                                      .setPositiveButton("ok",(dialog, which) -> {
+                                          SharedPref shrd=new SharedPref(getActivity());
+                                          //     shrd.setIslogin(true);
+                                          shrd.setFirstname(response.body().getData().get(0).getFirstname());
+                                          shrd.setUserId(response.body().getData().get(0).getUserid());
+                                          shrd.setType(response.body().getData().get(0).getType());
+                                          shrd.setUserphnum(response.body().getData().get(0).getContact());
+                                          Fragment fragment = new ProfileFragment();
+                                          ((AppCompatActivity) getActivity()).getSupportFragmentManager()
+                                                  .beginTransaction()
+                                                  .replace(R.id.nav_host_fragment, fragment)
+                                                  .addToBackStack(fragment.getTag())
+                                                  .commit();
+                                      }).show();
+
                         }else {
-                            Toast.makeText(getContext(), "Wrong email id or password", Toast.LENGTH_SHORT).show();
+
+                                new MaterialAlertDialogBuilder(getActivity()).setMessage("Wrong Email Id and password")
+                                        .setPositiveButton("OK",(dialog, which) -> {
+                                            /////
+                                        }).show();
                         }
                     } else {
-                        Toast.makeText(getContext(), "Error! Please try again!", Toast.LENGTH_SHORT).show();
+
+                        new MaterialAlertDialogBuilder(getActivity()).setMessage("Error! Please try again!")
+                                .setPositiveButton("OK",(dialog, which) -> {
+                                    /////
+                                }).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<LoginResponse> call, Throwable t) {
-                    System.out.println("error");
+
+                    new MaterialAlertDialogBuilder(getActivity()).setMessage("Error! Please try again!")
+                            .setPositiveButton("OK",(dialog, which) -> {
+                                /////
+                            }).show();
                 }
             });
         }catch (Exception ex){
-            System.out.println(ex.toString());
+
+            new MaterialAlertDialogBuilder(getActivity()).setMessage(ex.toString())
+                    .setPositiveButton("OK",(dialog, which) -> {
+                        /////
+                    }).show();
 
         }
     }

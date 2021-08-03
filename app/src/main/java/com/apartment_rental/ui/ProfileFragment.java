@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.apartment_rental.R;
 import com.apartment_rental.SharedPref;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 
 public class ProfileFragment extends Fragment {
@@ -82,9 +83,15 @@ public class ProfileFragment extends Fragment {
         SignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            shrd.clearPreferences();
-            Fragment frag=new ProfileFragment();
-            loadFragment(getContext(),frag);
+
+                new MaterialAlertDialogBuilder(getContext()).setMessage("Do You Want To Signout")
+                        .setPositiveButton("ok",(dialog, which) -> {
+                            shrd.clearPreferences();
+                            Fragment frag=new ProfileFragment();
+                            loadFragment(getContext(),frag);
+                        }).setNegativeButton("Cancel",(dialog, which) -> {
+                }).show();
+
             }
         });
         return vw;
