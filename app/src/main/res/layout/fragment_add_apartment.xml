@@ -83,6 +83,7 @@
             android:hint="Rent"
             android:layout_weight="0.5"
             android:fontFamily="@font/montserrat"
+            android:inputType="number"
             android:id="@+id/apartrent_ed"
        />
         <EditText
@@ -94,7 +95,7 @@
             android:hint="Size"
             android:layout_weight="0.5"
             android:fontFamily="@font/montserrat"
-
+            android:inputType="number"
             android:id="@+id/apartsize_ed"
             />
     </LinearLayout>

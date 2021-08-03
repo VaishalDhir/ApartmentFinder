@@ -64,9 +64,8 @@ public class ApartmentListFragment extends Fragment {
 
         progress=new ProgressDialog(getActivity());
         progress.setMessage("Loading");
-        progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progress.setIndeterminate(true);
-        progress.setProgress(0);
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
         progress.show();
 
         rangeSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {

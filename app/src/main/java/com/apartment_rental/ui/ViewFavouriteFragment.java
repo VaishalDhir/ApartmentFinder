@@ -56,9 +56,8 @@ public class ViewFavouriteFragment extends Fragment {
         userServices = ApiUtils.getUserService();
         progress=new ProgressDialog(getActivity());
         progress.setMessage("Loading");
-        progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progress.setIndeterminate(true);
-        progress.setProgress(0);
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
         progress.show();
         getData();
 
@@ -112,20 +111,26 @@ public class ViewFavouriteFragment extends Fragment {
 
                         if(response.body().getStatus()){
                             progress.dismiss();
-                            int len=response.body().getData().size();
-                            System.out.println(len);
+//                            int len=response.body().getData().size();
+//                            System.out.println(len);
                             fav.add(response.body());
-                            for(int i=0;i<1;i++){
-                                int lent=fav.get(i).getData().size();
-                                for (int j = i; j <=lent-1 ; j++) {
+                            int lengt=fav.size();
+                            if(lengt!=0) {
+                                for (int i = 0; i <= fav.size() - 1; i++) {
+                                    int len=fav.get(i).getData().size();
+                                    for(int j=i;j<len;j++) {
+                                        for (int k = 0; k <= apData.size() - 1; k++) {
+                                            if (fav.get(i).getData().get(j).getApartmentId() == apData.get(k).getApartmentId()) {
+                                                favApData.add(apData.get(k));
+                                                FavouriteAdapter aptList = new FavouriteAdapter(getActivity(), favApData);
+                                                lisRecyclerView.setAdapter(aptList);
+                                            }
+                                        }
+                                    }
 
-
-                                    favApData.add(apData.get(j));
-                                        FavouriteAdapter aptList = new FavouriteAdapter(getActivity(), favApData);
-                                        lisRecyclerView.setAdapter(aptList);
-
-
-                               }
+                                }
+                            }else{
+                                System.out.println("No Data");
                             }
                         }
                     } else {

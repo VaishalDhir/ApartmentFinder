@@ -171,10 +171,8 @@ public class AddApartmentFragment extends Fragment implements LocationListener {
 
                 if (validateApartment(ApartType, ApartAddress, Rent, Size, ApartDesc_ed, facility)) {
                     progress=new ProgressDialog(getActivity());
-                    progress.setMessage("Loading");
-                    progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                    progress.setIndeterminate(true);
-                    progress.setProgress(0);
+                    progress.setMessage("Please Wait for a While");
+                    progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                     progress.show();
                     AddProperty(ApartType, ApartAddress, Rent, Size, ApartDesc_ed, facility, radioButton.getText().toString());
                 }
@@ -304,7 +302,7 @@ public class AddApartmentFragment extends Fragment implements LocationListener {
                 Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
 
                 Bitmap b2 = null;
-                final int destWidth = 600;//or the width you need
+                final int destWidth = 500;//or the width you need
                 int origWidth = thumbnail.getWidth();
                 int origHeight = thumbnail.getHeight();
                 if (origWidth > destWidth) {
@@ -312,11 +310,11 @@ public class AddApartmentFragment extends Fragment implements LocationListener {
                     int destHeight = origHeight / (origWidth / destWidth);
                     // we create an scaled bitmap so it reduces the image, not just trim it
                     b2 = Bitmap.createScaledBitmap(thumbnail, destWidth, destHeight, false);
-                    ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-                    // compress to the format you want, JPEG, PNG...
-                    // 70 is the 0-100 quality percentage
-                    b2.compress(Bitmap.CompressFormat.JPEG, 70, outStream);
-                    // we save the file, at least until we have made use of it
+//                    ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+//                    // compress to the format you want, JPEG, PNG...
+//                    // 40 is the 0-100 quality percentage
+//                    b2.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
+//                    // we save the file, at least until we have made use of it
                 }
 
 

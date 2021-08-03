@@ -55,9 +55,8 @@ public class ViewRenterListFragment extends Fragment {
         userServices = ApiUtils.getUserService();
         progress=new ProgressDialog(getActivity());
         progress.setMessage("Loading");
-        progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progress.setIndeterminate(true);
-        progress.setProgress(0);
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
         progress.show();
         getData();
         SwipeHelper swipeHelper = new SwipeHelper(getActivity()) {
