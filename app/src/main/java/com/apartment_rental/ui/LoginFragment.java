@@ -81,6 +81,7 @@ public class LoginFragment extends Fragment {
                                 shrd.setFirstname(response.body().getData().get(0).getFirstname());
                                 shrd.setUserId(response.body().getData().get(0).getUserid());
                                 shrd.setType(response.body().getData().get(0).getType());
+                                shrd.setUserphnum(response.body().getData().get(0).getContact());
                             Fragment fragment = new ProfileFragment();
                             ((AppCompatActivity) getActivity()).getSupportFragmentManager()
                                     .beginTransaction()

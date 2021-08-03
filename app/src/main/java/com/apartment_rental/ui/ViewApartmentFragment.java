@@ -1,17 +1,22 @@
 package com.apartment_rental.ui;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +24,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.apartment_rental.R;
 
@@ -35,6 +41,8 @@ public class ViewApartmentFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View vw=inflater.inflate(R.layout.fragment_view_apartment, container, false);
+
+
         ViewPager imagePager=(ViewPager) vw.findViewById(R.id.imgPager);
         TextView vapRent=(TextView) vw.findViewById(R.id.vapRent);
         TextView vapSize=(TextView) vw.findViewById(R.id.vapSize);
@@ -43,6 +51,7 @@ public class ViewApartmentFragment extends Fragment {
         TextView vapType=(TextView) vw.findViewById(R.id.vapType);
         TextView vapDesc=(TextView) vw.findViewById(R.id.vapdiscription);
         ImageView backBtnImg=(ImageView) vw.findViewById(R.id.backbtn);
+        Button contact_person=(Button) vw.findViewById(R.id.contact_person);
         Bundle bundle = this.getArguments();
 
         String Type = bundle.getString("atype");
@@ -74,6 +83,12 @@ public class ViewApartmentFragment extends Fragment {
         vapType.setText(Type);
         vapDesc.setText(Description);
 
+        contact_person.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             //   sendSMS("+15149636316", "Hello world");
+            }
+        });
 
 
         backBtnImg.setOnClickListener(new View.OnClickListener() {
@@ -105,6 +120,19 @@ public class ViewApartmentFragment extends Fragment {
         });
         return vw;
     }
+//
+//    private void sendSMS(String phoneNo, String msg) {
+//        try {
+//            SmsManager smsManager = SmsManager.getDefault();
+//            smsManager.sendTextMessage(phoneNo, null, msg, null, null);
+//            Toast.makeText(getActivity(), "Message Sent",
+//                    Toast.LENGTH_LONG).show();
+//        } catch (Exception ex) {
+//            Toast.makeText(getActivity(),ex.getMessage().toString(),
+//                    Toast.LENGTH_LONG).show();
+//            ex.printStackTrace();
+//        }
+//    }
 
     public  class ViewPagerAdapter extends PagerAdapter{
         Context ctx;

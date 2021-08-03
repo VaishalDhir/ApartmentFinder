@@ -70,59 +70,50 @@ public class ApartmentListAdapter extends RecyclerView.Adapter<MyViewHolder> {
 //
 //        }
 
+        try {
+            List<Favourite> fav=new ArrayList<>();
 
+            Call<Favourite> call=userServices.GetFavourite(uid);
+            call.enqueue(new Callback<Favourite>() {
+                @Override
+                public void onResponse(Call<Favourite> call, Response<Favourite> response) {
+                    if (response.isSuccessful()) {
 
-//
-//
-//
-//        try {
-//            Call<Favourite> call=userServices.GetFavourite(uid);
-//            call.enqueue(new Callback<Favourite>() {
-//                @Override
-//                public void onResponse(Call<Favourite> call, Response<Favourite> response) {
-//                    if (response.isSuccessful()) {
-//
-//                        if(response.body().getStatus()){
-//                            List<Favourite> fav=new ArrayList<>();
-//
-//                            int len=response.body().getData().size();
-//                            System.out.println(len);
-//                            fav.add(response.body());
-//                            for(int i=0;i<1;i++){
-//                                int lent=fav.get(i).getData().size();
-//                                for (int j = i; j <=lent-1 ; j++) {
-//
-//                                if(apData.get(j).getApartmentId()==item.getApartmentId()) {
-//                                    holder.disLikeBtn.setImageResource(R.drawable.dlike);
-//                                }else{
-//                                    holder.disLikeBtn.setImageResource(R.drawable.like);
-//
-//                                }
-//
-//
-//
-//                                }
-//                            }
-//                        }
-//                    } else {
-//                        Toast.makeText(ctx, "Error! Please try again!", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//                @Override
-//                public void onFailure(Call<Favourite> call, Throwable t) {
-//                    System.out.println("error");
-//                }
-//            });
-//        }catch (Exception ex){
-//            System.out.println(ex.toString());
-//        }
-//
-//
-//
-//
+                        if(response.body().getStatus()){
 
+                            fav.add(response.body());
+                            int lengt=fav.size();
+                            if(lengt!=0) {
+                                for (int i = 0; i <= fav.size() - 1; i++) {
+                                    int len=fav.get(i).getData().size();
+                                    for(int j=i;j<len;j++) {
+                                        for (int k = 0; k <= apData.size() - 1; k++) {
+                                            if (fav.get(i).getData().get(j).getApartmentId() == item.getApartmentId()) {
+                                                holder.disLikeBtn.setImageResource(R.drawable.like);
+//                                                favApData.add(apData.get(k));
+//                                                FavouriteAdapter aptList = new FavouriteAdapter(getActivity(), favApData);
+//                                                lisRecyclerView.setAdapter(aptList);
+                                            }
+                                        }
+                                    }
 
-
+                                }
+                            }else{
+                                System.out.println("No Data");
+                            }
+                        }
+                    } else {
+                        Toast.makeText(ctx, "Error! Please try again!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                @Override
+                public void onFailure(Call<Favourite> call, Throwable t) {
+                    System.out.println("error");
+                }
+            });
+        }catch (Exception ex){
+            System.out.println(ex.toString());
+        }
 
 
 

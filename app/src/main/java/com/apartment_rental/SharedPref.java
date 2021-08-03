@@ -13,6 +13,7 @@ public class SharedPref {
     private static final String CONTACTNUMBER="firstname";
     private static final String USERID="userid";
     private static final String USERTYPE="type";
+    private static final String USERPHNUM="num";
 
 
 
@@ -45,13 +46,6 @@ public class SharedPref {
         return sharedPref.getString(LASTNAME,"");
 
     }
-    public void setContactnumber(String number){
-        editor.putString(CONTACTNUMBER,number);
-        editor.commit();
-    }
-    public String getContactnumber(){
-        return sharedPref.getString(CONTACTNUMBER,"");
-    }
 
     public void setUserId(int userId){
         editor.putInt(USERID,userId);
@@ -59,10 +53,7 @@ public class SharedPref {
     }
     public int getUserid(){
         return sharedPref.getInt(USERID,0);
-
-
     }
-
 
 
     public void setType(String type){
@@ -76,15 +67,16 @@ public class SharedPref {
     }
 
 
-//
-//    public void setIslogin(boolean isFirstTime) {
-//        editor.putBoolean(ISLOGIN, isFirstTime);
-//        editor.commit();
-//    }
-//
-//    public boolean isLogin() {
-//        return sharedPref.getBoolean(ISLOGIN, true);
-//    }
+    public void setUserphnum(String number){
+        editor.putString(USERPHNUM,number);
+        editor.commit();
+    }
+    public String getUserphnum(){
+        return sharedPref.getString(USERPHNUM,"");
+
+
+    }
+
 
     public  void clearPreferences(){
         setFirstname("");
