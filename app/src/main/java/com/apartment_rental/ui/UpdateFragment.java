@@ -97,7 +97,6 @@ public class UpdateFragment extends Fragment implements LocationListener {
 
         // Initialize the location fields
         if (location != null) {
-            System.out.println("Provider " + provider + " has been selected.");
             onLocationChanged(location);
         } else {
             Toast.makeText(getContext(), "Location not available", Toast.LENGTH_SHORT).show();
