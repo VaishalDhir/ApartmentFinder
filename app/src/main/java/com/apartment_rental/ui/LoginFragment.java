@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,18 +29,20 @@ import retrofit2.Response;
 
 public class LoginFragment extends Fragment {
     UserService userServices;
-
+    EditText emailIdEditText;
+    TextView errortxt;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        EditText emailIdEditText = (EditText) view.findViewById(R.id.email_ed);
+         emailIdEditText = (EditText) view.findViewById(R.id.email_ed);
         EditText passwordEditText = (EditText) view.findViewById(R.id.password_ed);
         RelativeLayout loginButton = (RelativeLayout) view.findViewById(R.id.rel1_btn);
         TextView ResetPasswordText=(TextView) view.findViewById(R.id.Resetpassword);
         userServices = ApiUtils.getUserService();
+        errortxt=(TextView) view.findViewById(R.id.errortextlogin);
 
         ResetPasswordText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,7 +99,7 @@ public class LoginFragment extends Fragment {
 
                         }else {
 
-                                new MaterialAlertDialogBuilder(getActivity()).setMessage("Wrong Email Id and password")
+                                new MaterialAlertDialogBuilder(getActivity()).setMessage(response.body().getMessage())
                                         .setPositiveButton("OK",(dialog, which) -> {
                                             /////
                                         }).show();
@@ -129,13 +133,14 @@ public class LoginFragment extends Fragment {
     }
 
     private boolean validateLogin(String email, String password) {
+        if (email == null || email.trim().length() == 0 ) {
 
-        if (email == null || email.trim().length() == 0) {
-            Toast.makeText(getContext(), "EM is required", Toast.LENGTH_SHORT).show();
+            errortxt.setText("Invalid email id");
             return false;
         }
         if (password == null || password.trim().length() == 0) {
-            Toast.makeText(getContext(), "Password is required", Toast.LENGTH_SHORT).show();
+
+            errortxt.setText("Password is required");
             return false;
         }
         return true;

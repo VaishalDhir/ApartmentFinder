@@ -25,10 +25,18 @@
 
         </TextView>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ani1"
+            android:textColor="@color/pale_orange"
+            android:textAlignment="center"
+            android:id="@+id/errortextlogin"/>
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_below="@id/ani1"
+            android:layout_below="@id/errortextlogin"
             android:background="@drawable/edbackground"
             android:layout_marginRight="35dp"
             android:layout_marginLeft="35dp"

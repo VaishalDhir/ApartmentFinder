@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +25,9 @@ import com.apartment_rental.controller.UserService;
 import com.apartment_rental.model.AddApartment;
 import com.apartment_rental.model.Apartments;
 import com.apartment_rental.model.Datuap;
+import com.apartment_rental.model.Img1;
+import com.apartment_rental.model.Img2;
+import com.apartment_rental.model.Img3;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -117,7 +121,43 @@ public class ViewRenterListFragment extends Fragment {
                         new SwipeHelper.UnderlayButtonClickListener() {
                             @Override
                             public void onClick(int pos) {
-                                Toast.makeText(getActivity(), "You clicked like on item position " + pos, Toast.LENGTH_LONG).show();
+                                Img1 bmpis=  apData.get(pos).getImg1();
+                                List<Integer> imgs=bmpis.getData();
+                                byte[] byteimgs = new byte[imgs.size()];
+                                for (int i = 0; i < imgs.size(); i++) {
+                                    byteimgs[i] = (byte) imgs.get(i).intValue();
+                                }
+                                Img2 bmpi2=  apData.get(pos).getImg2();
+                                List<Integer> img2=bmpi2.getData();
+                                byte[]  byteimg2 = new byte[img2.size()];
+                                for (int i = 0; i < img2.size(); i++) {
+                                    byteimg2[i] = (byte) img2.get(i).intValue();
+                                }
+                                Img3 bmpi3=  apData.get(pos).getImg3();
+                                List<Integer> img3=bmpi3.getData();
+                                byte[] byteimg3 = new byte[img3.size()];
+                                for (int i = 0; i < img3.size(); i++) {
+                                    byteimg3[i] = (byte) img3.get(i).intValue();
+                                }
+                                Fragment fragment = new UpdateFragment();
+                                Bundle bundle = new Bundle();
+
+                                bundle.putInt("aid",   apData.get(pos).getApartmentId());
+
+                                bundle.putString("atype",   apData.get(pos).getApartmentType());
+                                bundle.putString("renter",   apData.get(pos).getRenterType());
+                                bundle.putString("address",   apData.get(pos).getAddress());
+                                bundle.putString("size",   apData.get(pos).getSize());
+                                bundle.putInt("rent",   apData.get(pos).getRent());
+                                bundle.putString("facility",   apData.get(pos).getFacility());
+                                bundle.putString("description",   apData.get(pos).getDescription());
+                                bundle.putByteArray("img1", byteimgs);
+                                bundle.putByteArray("img2",byteimg2);
+                                bundle.putByteArray("img3", byteimg3);
+
+                                fragment.setArguments(bundle);
+                                ((FragmentActivity)getActivity()).getSupportFragmentManager().beginTransaction()
+                                        .replace(R.id.nav_host_fragment, fragment).addToBackStack("view").commit();
                             }
                         }
                 ));

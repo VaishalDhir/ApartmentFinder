@@ -3,6 +3,7 @@ package com.apartment_rental.ui;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,6 +23,7 @@ import com.apartment_rental.controller.UserService;
 import com.apartment_rental.model.Apartments;
 import com.apartment_rental.model.Datuap;
 import com.apartment_rental.model.Favourite;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,16 +88,25 @@ public class ViewFavouriteFragment extends Fragment {
                             FavouriteApartment();
                         }
                     } else {
-                        Toast.makeText(getContext(), "Error! Please try again!", Toast.LENGTH_SHORT).show();
+                        new MaterialAlertDialogBuilder(getActivity()).setMessage("Error! Please try again!")
+                                .setPositiveButton("OK",(dialog, which) -> {
+                                    /////
+                                }).show();
                     }
                 }
                 @Override
                 public void onFailure(Call<Apartments> call, Throwable t) {
-                    System.out.println("error");
+                    new MaterialAlertDialogBuilder(getActivity()).setMessage("Error! Please try again!")
+                            .setPositiveButton("OK",(dialog, which) -> {
+                                /////
+                            }).show();
                 }
             });
         }catch (Exception ex){
-            System.out.println(ex.toString());
+            new MaterialAlertDialogBuilder(getActivity()).setMessage(ex.toString())
+                    .setPositiveButton("OK",(dialog, which) -> {
+                        /////
+                    }).show();
         }
     }
 
@@ -115,7 +126,7 @@ public class ViewFavouriteFragment extends Fragment {
 //                            System.out.println(len);
                             fav.add(response.body());
                             int lengt=fav.size();
-                            if(lengt!=0) {
+                            if(fav.get(0).getData().size()!=0) {
                                 for (int i = 0; i <= fav.size() - 1; i++) {
                                     int len=fav.get(i).getData().size();
                                     for(int j=i;j<len;j++) {
@@ -130,20 +141,44 @@ public class ViewFavouriteFragment extends Fragment {
 
                                 }
                             }else{
-                                System.out.println("No Data");
+                                new MaterialAlertDialogBuilder(getActivity()).setMessage("There is No such Favorite exists")
+                                        .setPositiveButton("OK",(dialog, which) -> {
+                                            Fragment fragment = new ApartmentListFragment();
+                                            ((AppCompatActivity) getActivity()).getSupportFragmentManager()
+                                                    .beginTransaction()
+                                                    .replace(R.id.nav_host_fragment, fragment)
+                                                    .addToBackStack(fragment.getTag())
+                                                    .commit();
+                                        }).show();
                             }
+                        }else{
+                            new MaterialAlertDialogBuilder(getActivity()).setMessage("There is No such Favorite exists")
+                                    .setPositiveButton("OK",(dialog, which) -> {
+                                        Fragment fragment = new ApartmentListFragment();
+                                        ((AppCompatActivity) getActivity()).getSupportFragmentManager()
+                                                .beginTransaction()
+                                                .replace(R.id.nav_host_fragment, fragment)
+                                                .addToBackStack(fragment.getTag())
+                                                .commit();
+                                    }).show();
                         }
                     } else {
-                        Toast.makeText(getContext(), "Error! Please try again!", Toast.LENGTH_SHORT).show();
-                    }
+                        new MaterialAlertDialogBuilder(getActivity()).setMessage("Error! Please try again!")
+                                .setPositiveButton("OK",(dialog, which) -> {
+                                    /////
+                                }).show();                    }
                 }
                 @Override
                 public void onFailure(Call<Favourite> call, Throwable t) {
-                    System.out.println("error");
-                }
+                    new MaterialAlertDialogBuilder(getActivity()).setMessage("Error! Please try again!")
+                            .setPositiveButton("OK",(dialog, which) -> {
+                                /////
+                            }).show();                }
             });
         }catch (Exception ex){
-            System.out.println(ex.toString());
-        }
+            new MaterialAlertDialogBuilder(getActivity()).setMessage(ex.toString())
+                    .setPositiveButton("OK",(dialog, which) -> {
+                        /////
+                    }).show();        }
     }
 }

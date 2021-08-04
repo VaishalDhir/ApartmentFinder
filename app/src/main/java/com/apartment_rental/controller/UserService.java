@@ -57,4 +57,14 @@ public interface UserService {
     @FormUrlEncoded
     Call<AddApartment> DeleteApt(@Field("apartmentId") int apartmentId);
 
+
+    @POST("updateprop/")
+    @FormUrlEncoded
+    Call<AddApartment> UpdateProperty(@Field("apartmentId") int apartmentId,
+                                      @Field("Address") String Address, @Field("ApartmentType") String ApartmentType, @Field("Rent") String Rent,
+                                      @Field("Size") String Size, @Field("Facility") String Facility,
+                                      @Field("Description") String Description, @Field("RenterType") String RenterType,
+                                      @Field("img1") byte[] img1, @Field("img2") byte[] img2, @Field("img3") byte[] img3,
+                                      @Field("latitude") double latitude, @Field("longitude") double longitude);
+
 }
