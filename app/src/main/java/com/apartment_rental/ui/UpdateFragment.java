@@ -71,7 +71,7 @@ public class UpdateFragment extends Fragment implements LocationListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_add_apartment, container, false);
+        View view = inflater.inflate(R.layout.fragment_update, container, false);
         checkAndroidVersion();
 
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
@@ -133,7 +133,7 @@ public class UpdateFragment extends Fragment implements LocationListener {
         apartment_img2 = (ImageView) view.findViewById(R.id.img2);
         apartment_img3 = (ImageView) view.findViewById(R.id.img3);
         RadioGroup renter_type = (RadioGroup) view.findViewById(R.id.radioGroup);
-        Button addApartment = (Button) view.findViewById(R.id.addProp);
+        Button addApartment = (Button) view.findViewById(R.id.updateProp);
         apartmentType_ed.setText(Type);
         apartmentadd_ed.setText(Address);
         apartmentDesc_ed.setText(Description);
