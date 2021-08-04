@@ -57,7 +57,7 @@ const register = async (req, res, next) => {
               }
             );
           } else {
-            return res.json({ status: 412, error: error.array() });
+            return res.json({ status: false, message: error.array() });
           }
         }
       }

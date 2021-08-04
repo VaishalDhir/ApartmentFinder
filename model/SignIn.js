@@ -20,9 +20,12 @@ const SignIn = async (req, res, next) => {
         [uname],
         function (error, results, fields) {
           if (error) {
+            console.log(error);
             res.json({
-              status: false,
+              status: 422,
+              success: false,
               message: "there are some error with query",
+              data: [],
             });
           } else {
             console.log("here");
@@ -40,6 +43,7 @@ const SignIn = async (req, res, next) => {
                       //  token: jToken,
                     });
                   } else {
+                    console.log("in coreect");
                     res.json({
                       status: 422,
                       success: false,
@@ -50,9 +54,12 @@ const SignIn = async (req, res, next) => {
                 }
               );
             } else {
+              console.log("--------------");
               res.json({
                 status: 404,
-                message: "Something Went Wrong",
+                success: false,
+                message: "No Such Email Exists",
+                data: [],
               });
             }
           }
@@ -60,10 +67,20 @@ const SignIn = async (req, res, next) => {
       );
     } catch (err) {
       next(err);
-      res.json({ status: 412, error: err.array() });
+      res.json({
+        status: 404,
+        success: false,
+        message: "There is Some Problem!!",
+        data: [],
+      });
     }
   } else {
-    return res.json({ status: 412, error: error.array() });
+    return res.json({
+      status: 404,
+      success: false,
+      message: "There is Some Problem!!",
+      data: [],
+    });
   }
 };
 module.exports = SignIn;

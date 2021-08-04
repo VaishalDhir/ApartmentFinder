@@ -25,7 +25,6 @@ const InsertProperty = async (req, res, next) => {
   };
 
   try {
-    console.log("hello world");
     await conn.query(
       "INSERT INTO apartmentinfo SET ?",
       apartmentinfo,
@@ -38,6 +37,8 @@ const InsertProperty = async (req, res, next) => {
             error: error.sqlMessage,
           });
         } else {
+          console.log("hello world");
+
           res.json({
             status: true,
             message: "Property Inserted registered sucessfully!! Great Work",
@@ -48,7 +49,7 @@ const InsertProperty = async (req, res, next) => {
     );
   } catch (err) {
     next(err);
-    res.json({ status: 412, error: err.array() });
+    res.json({ status: false, message: err.array() });
   }
 };
 

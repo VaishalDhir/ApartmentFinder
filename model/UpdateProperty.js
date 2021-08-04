@@ -36,6 +36,7 @@ const UpdateProperty = async (req, res, next) => {
             error: error.sqlMessage,
           });
         } else {
+          console.log("---------------------");
           res.json({
             status: true,
             message: "property updated sucessfully!! Great Work",
@@ -45,8 +46,13 @@ const UpdateProperty = async (req, res, next) => {
       }
     );
   } catch (err) {
+    console.log("/////////////////");
     next(err);
-    res.json({ status: 412, error: err.array() });
+    res.json({
+      status: false,
+      message: "property updated sucessfully!! Great Work",
+      error: err.array(),
+    });
   }
 };
 module.exports = UpdateProperty;
