@@ -165,8 +165,7 @@ public class ViewApartmentFragment extends Fragment {
                             Intent intent = new Intent(Intent.ACTION_SENDTO);
                             intent.setData(Uri.parse("mailto:?subject=" + "Regarding Apartment Visit" + "&to=" +response.body().getData().get(0).getEmail())); // only email apps should handle this
                             intent.putExtra(Intent.EXTRA_EMAIL, "ashish4321ynr@gmail.com");
-//                            intent.putExtra(Intent.EXTRA_SUBJECT, "Subject here");
-//                            intent.putExtra(Intent.EXTRA_TEXT,"Body Here");
+
 
                             try {
                                 if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
@@ -234,8 +233,6 @@ public class ViewApartmentFragment extends Fragment {
         public Object instantiateItem(@NonNull ViewGroup container, final int position) {
             // inflating the item.xml
             View itemView = mLayoutInflater.inflate(R.layout.imagelayout, container, false);
-
-            // referencing the image view from the item.xml file
             ImageView imageView = (ImageView) itemView.findViewById(R.id.imageViewMain);
 
             bitmapImage=getImage(imgList.get(position));
