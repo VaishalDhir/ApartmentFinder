@@ -136,7 +136,7 @@
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/Blue_new"
                 android:id="@+id/radioButton_2"
-                android:checked="true"
+                android:checked="false"
                 android:layout_gravity="center_horizontal"
                 android:textSize="15dp" />
 
@@ -148,7 +148,7 @@
                 android:fontFamily="@font/montserrat"
                 android:id="@+id/radioButton_3"
                 android:layout_gravity="center_horizontal"
-                android:checked="false"
+                android:checked="true"
                 android:textSize="15dp"
               />
 

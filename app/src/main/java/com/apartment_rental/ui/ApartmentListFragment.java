@@ -51,8 +51,13 @@ public class ApartmentListFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_apartment_list, container, false);
         Button filterButton=(Button) view.findViewById(R.id.filterbtn);
          listOfApartment=(RecyclerView) view.findViewById(R.id.aplist);
-      //  RangeSlider rangeSlider = view.findViewById(R.id.sliderRange);
-        //RelativeLayout filterRel= view.findViewById(R.id.relsliderRange);
+        Bundle bundle = this.getArguments();
+
+        String adress=bundle.getString("address");
+        String atype=bundle.getString("atype");
+        String rtype=bundle.getString("rtype");
+        int minRent=bundle.getInt("minrent");
+        int maxRent=bundle.getInt("maxrent");
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         listOfApartment.setLayoutManager(layoutManager);
         listOfApartment.addItemDecoration(new DividerItemDecoration(listOfApartment.getContext(), DividerItemDecoration.VERTICAL));
