@@ -136,6 +136,7 @@ public class ApartmentListAdapter extends RecyclerView.Adapter<MyViewHolder> {
                 Fragment fragment = new ViewApartmentFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("atype", item.getApartmentType());
+                bundle.putInt("aid", item.getApartmentId());
                 bundle.putString("renter", item.getRenterType());
                 bundle.putString("address", item.getAddress());
                 bundle.putString("size", item.getSize());

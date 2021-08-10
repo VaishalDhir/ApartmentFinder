@@ -157,6 +157,7 @@ public class MapsFragment extends Fragment{
                                                   bundle.putString("address", item.get(val).getAddress());
                                                   bundle.putString("size", item.get(val).getSize());
                                                   bundle.putInt("rent", item.get(val).getRent());
+                                                  bundle.putInt("aid", item.get(val).getApartmentId());
                                                    bundle.putString("displaystatus", "map");
                                                   bundle.putString("description", item.get(val).getDescription());
                                                   bundle.putByteArray("img1", byteimgs);

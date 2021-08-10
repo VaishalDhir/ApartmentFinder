@@ -62,7 +62,7 @@ public class FilterPageFragment extends Fragment {
                 String aTypeVal=radioButton_aType.getText().toString();
                 String rTypeVal=radioButton_rType.getText().toString();
 
-                if(min>=1000 && max<=5000){
+                if((min>=1000 && min<=5000) && (max>=1000 && max<=5000)){
                     Fragment fragment = new ApartmentListFragment();
                     Bundle bundle = new Bundle();
                     bundle.putString("atype",aTypeVal);

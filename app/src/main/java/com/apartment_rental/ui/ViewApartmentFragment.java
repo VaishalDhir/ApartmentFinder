@@ -2,9 +2,11 @@ package com.apartment_rental.ui;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,16 +28,25 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.apartment_rental.Adapter.ApartmentListAdapter;
 import com.apartment_rental.R;
 import com.apartment_rental.SharedPref;
+import com.apartment_rental.controller.ApiUtils;
+import com.apartment_rental.controller.UserService;
+import com.apartment_rental.model.Apartments;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class ViewApartmentFragment extends Fragment {
+    UserService userServices;
 
     SharedPref shrdd;
     @Override
@@ -45,7 +56,7 @@ public class ViewApartmentFragment extends Fragment {
 
         View vw=inflater.inflate(R.layout.fragment_view_apartment, container, false);
 
-
+        userServices= ApiUtils.getUserService();
         ViewPager imagePager=(ViewPager) vw.findViewById(R.id.imgPager);
         TextView vapRent=(TextView) vw.findViewById(R.id.vapRent);
         TextView vapSize=(TextView) vw.findViewById(R.id.vapSize);
@@ -64,6 +75,7 @@ public class ViewApartmentFragment extends Fragment {
         String screenType = bundle.getString("displaystatus");
         String Size=bundle.getString("size");
         int Rent=bundle.getInt("rent");
+        int apId=bundle.getInt("aid");
         byte[] img1=bundle.getByteArray("img1");
         byte[] img2=bundle.getByteArray("img2");
         byte[] img3=bundle.getByteArray("img3");
@@ -90,7 +102,11 @@ public class ViewApartmentFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(shrdd.getUserid()!=0) {
-                    //   sendSMS("+15149636316", "Hello world");
+
+
+                    getEmailId(apId);
+
+
                 }else{
                     new MaterialAlertDialogBuilder(getActivity()).setMessage("You need to Sign in First")
                             .setPositiveButton("OK",(dialog, which) -> {
@@ -135,19 +151,61 @@ public class ViewApartmentFragment extends Fragment {
         });
         return vw;
     }
-//
-//    private void sendSMS(String phoneNo, String msg) {
-//        try {
-//            SmsManager smsManager = SmsManager.getDefault();
-//            smsManager.sendTextMessage(phoneNo, null, msg, null, null);
-//            Toast.makeText(getActivity(), "Message Sent",
-//                    Toast.LENGTH_LONG).show();
-//        } catch (Exception ex) {
-//            Toast.makeText(getActivity(),ex.getMessage().toString(),
-//                    Toast.LENGTH_LONG).show();
-//            ex.printStackTrace();
-//        }
-//    }
+
+    private void getEmailId(int apId) {
+        try {
+            Call<Apartments> call=userServices.getEmailId(apId);
+            call.enqueue(new Callback<Apartments>() {
+                @Override
+                public void onResponse(Call<Apartments> call, Response<Apartments> response) {
+                    if (response.isSuccessful()) {
+
+                        if(response.body().getStatus()){
+
+                            Intent intent = new Intent(Intent.ACTION_SENDTO);
+                            intent.setData(Uri.parse("mailto:?subject=" + "Regarding Apartment Visit" + "&to=" +response.body().getData().get(0).getEmail())); // only email apps should handle this
+                            intent.putExtra(Intent.EXTRA_EMAIL, "ashish4321ynr@gmail.com");
+//                            intent.putExtra(Intent.EXTRA_SUBJECT, "Subject here");
+//                            intent.putExtra(Intent.EXTRA_TEXT,"Body Here");
+
+                            try {
+                                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                                    startActivity(intent);
+                                }
+                            } catch (android.content.ActivityNotFoundException ex) {
+                                Toast.makeText(getActivity(), "No Email client found!!",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+
+                        }else{
+                            new MaterialAlertDialogBuilder(getActivity()).setMessage(response.body().getErr())
+                                    .setPositiveButton("OK",(dialog, which) -> {
+
+                                    }).show();
+                        }
+                    } else {
+                        new MaterialAlertDialogBuilder(getActivity()).setMessage("Error! Please try again!")
+                                .setPositiveButton("OK",(dialog, which) -> {
+
+                                }).show();
+                    }
+                }
+                @Override
+                public void onFailure(Call<Apartments> call, Throwable t) {
+                    new MaterialAlertDialogBuilder(getActivity()).setMessage("Error! Please try again!")
+                            .setPositiveButton("OK",(dialog, which) -> {
+
+                            }).show();
+                }
+            });
+        }catch (Exception ex){
+            new MaterialAlertDialogBuilder(getActivity()).setMessage(ex.toString())
+                    .setPositiveButton("OK",(dialog, which) -> {
+
+                    }).show();
+        }
+    }
+
 
     public  class ViewPagerAdapter extends PagerAdapter{
         Context ctx;

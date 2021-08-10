@@ -58,6 +58,11 @@ public class Datuap {
     public Integer getApartmentId() {
         return apartmentId;
     }
+    @SerializedName("email")
+    @Expose
+    private String email;
+
+
 
     public void setApartmentId(Integer apartmentId) {
         this.apartmentId = apartmentId;
@@ -180,5 +185,12 @@ public class Datuap {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

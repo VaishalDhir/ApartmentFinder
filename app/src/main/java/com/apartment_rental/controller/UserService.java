@@ -72,4 +72,8 @@ public interface UserService {
     Call<Apartments> getFilteredProperty(@Field("Address") String address,@Field("ApartmentType") String apartmentType,
                                          @Field("RenterType") String renterType,@Field("min") String min,@Field("max") String max);
 
+    @POST("email/")
+    @FormUrlEncoded
+    Call<Apartments> getEmailId(@Field("apartmentId") int apartmentId);
+
 }
