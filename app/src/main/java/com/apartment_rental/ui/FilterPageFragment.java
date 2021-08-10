@@ -70,6 +70,7 @@ public class FilterPageFragment extends Fragment {
                     bundle.putString("address",loc);
                     bundle.putInt("minrent",min);
                     bundle.putInt("maxrent",max);
+                    fragment.setArguments(bundle);
                     ((AppCompatActivity) getActivity()).getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.nav_host_fragment, fragment)

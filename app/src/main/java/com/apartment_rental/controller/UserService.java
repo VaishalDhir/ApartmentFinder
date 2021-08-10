@@ -48,7 +48,7 @@ public interface UserService {
     @FormUrlEncoded
     Call<Favourite> GetFavourite(@Field("userId") int userId);
 
-    @POST("getrenterprop")
+    @POST("getrenterprop/")
     @FormUrlEncoded
     Call<Apartments> getRenterProp(@Field("userId") int userId);
 
@@ -66,5 +66,10 @@ public interface UserService {
                                       @Field("Description") String Description, @Field("RenterType") String RenterType,
                                       @Field("img1") byte[] img1, @Field("img2") byte[] img2, @Field("img3") byte[] img3,
                                       @Field("latitude") double latitude, @Field("longitude") double longitude);
+
+    @POST("filter/")
+    @FormUrlEncoded
+    Call<Apartments> getFilteredProperty(@Field("Address") String address,@Field("ApartmentType") String apartmentType,
+                                         @Field("RenterType") String renterType,@Field("min") String min,@Field("max") String max);
 
 }
