@@ -8,6 +8,9 @@ const Properties = require("../model/GetProperties");
 const UpdateProp = require("../model/UpdateProperty");
 const DeleteProperty = require("../model/DeleteProperty");
 const getRenterProperty = require("../model/GetRProperty");
+const getEmaiId = require("../model/GetEmaiId");
+const getFilterProperty = require("../model/filter");
+
 const addToFav = require("../model/addFav");
 const viewFav = require("../model/viewFav");
 
@@ -55,5 +58,7 @@ router.post("/deleteprop", DeleteProperty);
 router.post("/getrenterprop", getRenterProperty);
 router.post("/addtofav", addToFav);
 router.post("/viewfav", viewFav);
+router.post("/filter", getFilterProperty);
+router.post("/email", getEmaiId);
 
 module.exports = router;
