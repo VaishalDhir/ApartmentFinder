@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,8 +25,6 @@ import com.apartment_rental.controller.SwipeHelper;
 import com.apartment_rental.controller.UserService;
 import com.apartment_rental.model.Apartments;
 import com.apartment_rental.model.Datuap;
-import com.google.android.material.slider.LabelFormatter;
-import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -52,47 +51,54 @@ public class ApartmentListFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_apartment_list, container, false);
         Button filterButton=(Button) view.findViewById(R.id.filterbtn);
          listOfApartment=(RecyclerView) view.findViewById(R.id.aplist);
-        RangeSlider rangeSlider = view.findViewById(R.id.sliderRange);
-        RelativeLayout filterRel= view.findViewById(R.id.relsliderRange);
+      //  RangeSlider rangeSlider = view.findViewById(R.id.sliderRange);
+        //RelativeLayout filterRel= view.findViewById(R.id.relsliderRange);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         listOfApartment.setLayoutManager(layoutManager);
         listOfApartment.addItemDecoration(new DividerItemDecoration(listOfApartment.getContext(), DividerItemDecoration.VERTICAL));
 
         userServices = ApiUtils.getUserService();
 
-        getData(val1,val2);
+        getData();
 
         progress=new ProgressDialog(getActivity());
         progress.setMessage("Loading");
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
         progress.show();
-
-        rangeSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {
-            @Override
-            public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
-                List<Float> vals=slider.getValues();
-                 val1=vals.get(0);
-                 val2=vals.get(1);
-
-                progress.setMessage("Loading");
-                progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                progress.setIndeterminate(true);
-                progress.setProgress(0);
-                progress.show();
-                apart.clear();
-
-                apData.clear();
-
-                getData(val1,val2);
-                count++;
-                System.out.println("count+"+count);
-            }
-        });
+//
+//        rangeSlider.addOnChangeListener(new RangeSlider.OnChangeListener() {
+//            @Override
+//            public void onValueChange(@NonNull RangeSlider slider, float value, boolean fromUser) {
+//                List<Float> vals=slider.getValues();
+//                 val1=vals.get(0);
+//                 val2=vals.get(1);
+//
+//                progress.setMessage("Loading");
+//                progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+//                progress.setIndeterminate(true);
+//                progress.setProgress(0);
+//                progress.show();
+//                apart.clear();
+//
+//                apData.clear();
+//
+//                getData(val1,val2);
+//                count++;
+//                System.out.println("count+"+count);
+//            }
+//        });
         filterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                filterRel.setVisibility(View.VISIBLE);
+
+                Fragment fragment = new FilterPageFragment();
+                ((AppCompatActivity) getActivity()).getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.nav_host_fragment, fragment)
+                        .addToBackStack(fragment.getTag())
+                        .commit();
+//                filterRel.setVisibility(View.VISIBLE);
             }
         });
 
@@ -106,7 +112,7 @@ public class ApartmentListFragment extends Fragment {
         return view;
     }
 
-    private void getData(Float value1, Float value2){
+    private void getData(){
         try {
             Call<Apartments> call=userServices.getAllApartments();
             call.enqueue(new Callback<Apartments>() {
@@ -122,30 +128,36 @@ public class ApartmentListFragment extends Fragment {
                                 apData.clear();
                                 for (int j = i; j <=len-1 ; j++) {
                                     progress.dismiss();
-
-                                    int rent=apart.get(i).getData().get(j).getRent();
-                                    int filterval1=Math.round(value1);
-                                    int filterval2=Math.round(value2);
-                                    if(rent>filterval1 && rent<filterval2){
+//
+//                                    int rent=apart.get(i).getData().get(j).getRent();
+//                                    int filterval1=Math.round(value1);
+//                                    int filterval2=Math.round(value2);
+//                                    if(rent>filterval1 && rent<filterval2){
                                         apData.add(apart.get(i).getData().get(j));
                                         System.out.println("size----------"+apData.size());
                                          aptList=new ApartmentListAdapter(getActivity(),apData);
                                         listOfApartment.setAdapter(aptList);
 
-                                    }
+                                  //  }
                                 }
                             }
                         }
                     } else {
+                        progress.dismiss();
+
                         Toast.makeText(getContext(), "Error! Please try again!", Toast.LENGTH_SHORT).show();
                     }
                 }
                 @Override
                 public void onFailure(Call<Apartments> call, Throwable t) {
+                    progress.dismiss();
+
                     System.out.println("error");
                 }
             });
         }catch (Exception ex){
+            progress.dismiss();
+
             System.out.println(ex.toString());
         }
     }

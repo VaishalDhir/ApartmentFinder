@@ -11,6 +11,11 @@
         <item name="colorOnSecondary">@color/Black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+
     </style>
+    <style name="Widget.App.Tooltip" parent="Widget.MaterialComponents.Tooltip">
+    <item name="android:textAppearance">@font/montserrat</item>
+    <item name="backgroundTint">@color/colorPrimaryDark</item>
+    </style>
+
 </resources>
