@@ -331,10 +331,7 @@ public class AddApartmentFragment extends Fragment implements LocationListener {
                     int destHeight = origHeight / (origWidth / destWidth);
                     // we create an scaled bitmap so it reduces the image, not just trim it
                     b2 = Bitmap.createScaledBitmap(thumbnail, destWidth, destHeight, false);
-//                    ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-//                    // compress to the format you want, JPEG, PNG...
-//                    // 40 is the 0-100 quality percentage
-//                    b2.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
+//
 //                    // we save the file, at least until we have made use of it
                 }
 
