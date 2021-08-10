@@ -2,7 +2,8 @@
 const conn = require("../config/db");
 
 const GetEmailId = (req, res, next) => {
-  const query = `SELECT us.email FROM apartmentinfo AS ap Inner JOIN user as us WHERE ap.userId=us.userid AND ap.apartmentId=${req.body.apartmentId}`;
+  const query = `SELECT us.email FROM apartmentinfo AS ap Inner JOIN user as us WHERE ap.userId=us.userid 
+  AND ap.apartmentId=${req.body.apartmentId}`;
   console.log(query);
   conn.query(query, req.body.userId, function (err, data, fields) {
     if (err) {
