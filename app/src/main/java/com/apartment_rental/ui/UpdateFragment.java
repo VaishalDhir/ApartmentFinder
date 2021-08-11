@@ -352,11 +352,7 @@ public class UpdateFragment extends Fragment implements LocationListener {
                     int destHeight = origHeight / (origWidth / destWidth);
                     // we create an scaled bitmap so it reduces the image, not just trim it
                     b2 = Bitmap.createScaledBitmap(thumbnail, destWidth, destHeight, false);
-//                    ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-//                    // compress to the format you want, JPEG, PNG...
-//                    // 40 is the 0-100 quality percentage
-//                    b2.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
-//                    // we save the file, at least until we have made use of it
+
                 }
 
 
@@ -522,20 +518,6 @@ public class UpdateFragment extends Fragment implements LocationListener {
         System.out.println(lang);
     }
 
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(@NonNull String provider) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(@NonNull String provider) {
-
-    }
     public Bitmap getImage(byte[] image) {
         Bitmap bmsp = BitmapFactory.decodeByteArray(image, 0 ,image.length);
         return bmsp;
