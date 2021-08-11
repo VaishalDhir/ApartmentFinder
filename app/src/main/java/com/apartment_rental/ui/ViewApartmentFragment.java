@@ -65,6 +65,7 @@ public class ViewApartmentFragment extends Fragment {
         TextView vapType=(TextView) vw.findViewById(R.id.vapType);
         TextView vapDesc=(TextView) vw.findViewById(R.id.vapdiscription);
         ImageView backBtnImg=(ImageView) vw.findViewById(R.id.backbtn);
+        ImageView shareBtnImg=(ImageView) vw.findViewById(R.id.imagedShareIcon);
         Button contact_person=(Button) vw.findViewById(R.id.contact_person);
         Bundle bundle = this.getArguments();
         shrdd=new SharedPref(getActivity());
@@ -146,6 +147,20 @@ public class ViewApartmentFragment extends Fragment {
                             .replace(R.id.nav_host_fragment, fragment)
                             .addToBackStack(fragment.getTag())
                             .commit();
+                }
+            }
+        });
+        shareBtnImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
+                whatsappIntent.setType("text/plain");
+                whatsappIntent.setPackage("com.whatsapp");
+                whatsappIntent.putExtra(Intent.EXTRA_TEXT,Address+Type );
+                try {
+                    requireActivity().startActivity(whatsappIntent);
+                } catch (android.content.ActivityNotFoundException ex) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.whatsapp")));
                 }
             }
         });

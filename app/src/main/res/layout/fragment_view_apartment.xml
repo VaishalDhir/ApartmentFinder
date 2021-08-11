@@ -59,7 +59,7 @@
             android:layout_marginTop="10dp"
             android:gravity="end">
             <ImageView
-                android:id="@+id/imagedlikeIcon"
+                android:id="@+id/imagedShareIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
