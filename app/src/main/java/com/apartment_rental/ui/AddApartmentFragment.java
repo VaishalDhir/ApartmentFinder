@@ -492,20 +492,20 @@ public class AddApartmentFragment extends Fragment implements LocationListener {
         System.out.println(lang);
     }
 
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(@NonNull String provider) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(@NonNull String provider) {
-
-    }
+//    @Override
+//    public void onStatusChanged(String provider, int status, Bundle extras) {
+//
+//    }
+//
+//    @Override
+//    public void onProviderEnabled(@NonNull String provider) {
+//
+//    }
+//
+//    @Override
+//    public void onProviderDisabled(@NonNull String provider) {
+//
+//    }
 }
 
 //Reference for current lat lang
