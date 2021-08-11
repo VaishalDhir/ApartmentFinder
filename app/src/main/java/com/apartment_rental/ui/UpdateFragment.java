@@ -34,6 +34,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apartment_rental.R;
@@ -67,6 +68,8 @@ public class UpdateFragment extends Fragment implements LocationListener {
     private ProgressDialog progress;
     private  int ApartmentId;
     byte[] img1,img2,img3;
+    TextView errorText;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -133,6 +136,8 @@ public class UpdateFragment extends Fragment implements LocationListener {
         apartment_img3 = (ImageView) view.findViewById(R.id.img3);
         RadioGroup renter_type = (RadioGroup) view.findViewById(R.id.radioGroup);
         Button addApartment = (Button) view.findViewById(R.id.updateProp);
+        errorText=(TextView) view.findViewById(R.id.setError);
+
         apartmentType_ed.setText(Type);
         apartmentadd_ed.setText(Address);
         apartmentDesc_ed.setText(Description);
@@ -173,10 +178,12 @@ public class UpdateFragment extends Fragment implements LocationListener {
                 String ApartAddress = apartmentadd_ed.getText().toString();
                 String ApartDesc_ed = apartmentDesc_ed.getText().toString();
                 String Rent = apartmentRent_ed.getText().toString();
-                String Size = apartmentSize_ed.getText().toString();
+                if(Rent.equals("")){
+                    Rent="0";
+                }                String Size = apartmentSize_ed.getText().toString();
                 String facility = apartmentFacilty_ed.getText().toString();
                 int selectedId = renter_type.getCheckedRadioButtonId();
-
+                int RentVal=Integer.parseInt(Rent);
                 // find the radiobutton by returned id
                 RadioButton radioButton = (RadioButton) view.findViewById(selectedId);
 
@@ -185,8 +192,13 @@ public class UpdateFragment extends Fragment implements LocationListener {
                     progress.setMessage("Please Wait for a While");
                     progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                     progress.show();
-                    AddProperty(ApartType, ApartAddress, Rent, Size, ApartDesc_ed, facility, radioButton.getText().toString());
-                }
+                    if(RentVal>=1000 && RentVal<=5000) {
+                        AddProperty(ApartType, ApartAddress, String.valueOf(RentVal), Size, ApartDesc_ed, facility, radioButton.getText().toString());
+                    }else{
+                        errorText.setText("Rent Should be in between 1000-5000");
+
+                    }
+                    }
             }
         });
         return view;
@@ -468,34 +480,40 @@ public class UpdateFragment extends Fragment implements LocationListener {
     }
 
 
-    private boolean validateApartment(String aType, String address,String rent,String size,String desc,String facility) {
+    private boolean validateApartment(String aType, String address,String rent,String size,String desc,String facility){
 
         if (aType == null || aType.trim().length() == 0) {
-            Toast.makeText(getContext(), "Apartment Type is required", Toast.LENGTH_SHORT).show();
+            errorText.setText("Apartment Type is required");
             return false;
         }
         if (address == null || address.trim().length() == 0) {
-            Toast.makeText(getContext(), "Address is required", Toast.LENGTH_SHORT).show();
+            errorText.setText("Address is required");
+
             return false;
         }
         if (rent == null || rent.trim().length() == 0) {
-            Toast.makeText(getContext(), "Rent is required", Toast.LENGTH_SHORT).show();
+            errorText.setText("Rent is required");
+
             return false;
         }
         if (size == null || size.trim().length() == 0) {
-            Toast.makeText(getContext(), "Address is required", Toast.LENGTH_SHORT).show();
+            errorText.setText("Size is required");
+
             return false;
         }
         if (desc == null || desc.trim().length() == 0) {
-            Toast.makeText(getContext(), "Address is required", Toast.LENGTH_SHORT).show();
+            errorText.setText("Description Type is required");
+
             return false;
         }
         if (facility == null || facility.trim().length() == 0) {
-            Toast.makeText(getContext(), "Address is required", Toast.LENGTH_SHORT).show();
+            errorText.setText("Facility Type is required");
+
             return false;
         }
         return true;
     }
+
 
     @Override
     public void onLocationChanged(@NonNull Location location) {

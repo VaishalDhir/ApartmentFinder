@@ -10,22 +10,23 @@
         tools:context=".ui.AddApartmentFragment"
         android:background="@drawable/splashbackground">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/pale_orange"
-            android:gravity="center"
-            android:text=""
-            android:id="@+id/setError"
-            android:textAlignment="center"
-            android:layout_marginTop="10dp"
-            />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#CE312C51"
             android:id="@+id/mainrel"
             >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/pale_orange"
+                android:gravity="center"
+                android:text=""
+                android:id="@+id/setError"
+                android:textAlignment="center"
+                android:layout_marginTop="10dp"
+                />
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="40dp"

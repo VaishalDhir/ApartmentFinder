@@ -52,13 +52,49 @@
         android:layout_marginTop="20dp"
         android:id="@+id/apartaddress_ed"
         android:layout_marginLeft="35dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/apartaddress_ed"
+        android:id="@+id/linlay"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="35dp"
+        >
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:background="@drawable/edbackground"
+            android:layout_marginEnd="35dp"
+            android:textAlignment="center"
+            android:hint="City"
+            android:layout_weight="0.5"
+            android:fontFamily="@font/montserrat"
+            android:inputType="text"
+            android:id="@+id/apartcity_ed"
+            />
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:background="@drawable/edbackground"
+            android:layout_marginRight="35dp"
+            android:textAlignment="center"
+            android:hint="Postal Code"
+            android:layout_weight="0.5"
+            android:fontFamily="@font/montserrat"
+            android:inputType="text"
+            android:id="@+id/apartPostal_ed"
+            />
+    </LinearLayout>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@drawable/edbackground"
         android:layout_marginRight="35dp"
         android:textAlignment="center"
-        android:layout_below="@+id/apartaddress_ed"
+        android:layout_below="@+id/linlay"
         android:hint="Facilities"
         android:inputType="textMultiLine"
         android:fontFamily="@font/montserrat"

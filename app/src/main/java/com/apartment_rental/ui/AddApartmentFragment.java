@@ -124,6 +124,8 @@ public class AddApartmentFragment extends Fragment implements LocationListener {
         EditText apartmentRent_ed = (EditText) view.findViewById(R.id.apartrent_ed);
         EditText apartmentSize_ed = (EditText) view.findViewById(R.id.apartsize_ed);
         EditText apartmentFacilty_ed = (EditText) view.findViewById(R.id.apartfacility_ed);
+        EditText apartmentCity_ed = (EditText) view.findViewById(R.id.apartcity_ed);
+        EditText apartmentPostalCode_ed = (EditText) view.findViewById(R.id.apartPostal_ed);
 
         Button btnImg1 = (Button) view.findViewById(R.id.apart_img1);
         Button btnImg2 = (Button) view.findViewById(R.id.apart_img2);
@@ -164,6 +166,8 @@ public class AddApartmentFragment extends Fragment implements LocationListener {
                 String ApartType = apartmentType_ed.getText().toString();
                 String ApartAddress = apartmentadd_ed.getText().toString();
                 String ApartDesc_ed = apartmentDesc_ed.getText().toString();
+                String ApartCity_ed = apartmentCity_ed.getText().toString();
+                String ApartPostal_ed = apartmentPostalCode_ed.getText().toString();
                 String Rent = apartmentRent_ed.getText().toString();
                 if(Rent.equals("")){
                     Rent="0";
@@ -177,12 +181,13 @@ public class AddApartmentFragment extends Fragment implements LocationListener {
                 RadioButton radioButton = (RadioButton) view.findViewById(selectedId);
                 if(RentVal>=1000 && RentVal<=5000){
 
-                if (validateApartment(ApartType, ApartAddress, String.valueOf(RentVal), Size, ApartDesc_ed, facility)) {
+                if (validateApartment(ApartType, ApartAddress, String.valueOf(RentVal), Size, ApartDesc_ed, facility,ApartCity_ed,ApartPostal_ed)) {
                     progress=new ProgressDialog(getActivity());
                     progress.setMessage("Please Wait for a While");
                     progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                     progress.show();
-                    AddProperty(ApartType, ApartAddress, String.valueOf(Rent), Size, ApartDesc_ed, facility, radioButton.getText().toString());
+                    String CompleteAddress=ApartAddress+","+ApartCity_ed+","+ApartPostal_ed;
+                    AddProperty(ApartType, CompleteAddress, String.valueOf(RentVal), Size, ApartDesc_ed, facility, radioButton.getText().toString());
                 }}else{
                         errorText.setText("Rent Should be in between 1000-5000");
                 }
@@ -465,7 +470,7 @@ public class AddApartmentFragment extends Fragment implements LocationListener {
     }
 
 
-    private boolean validateApartment(String aType, String address,String rent,String size,String desc,String facility) {
+    private boolean validateApartment(String aType, String address, String rent, String size, String desc, String facility, String City, String Postal) {
 
         if (aType == null || aType.trim().length() == 0) {
             errorText.setText("Apartment Type is required");
@@ -487,12 +492,22 @@ public class AddApartmentFragment extends Fragment implements LocationListener {
             return false;
         }
         if (desc == null || desc.trim().length() == 0) {
-            errorText.setText("Description Type is required");
+            errorText.setText("Description  is required");
 
             return false;
         }
         if (facility == null || facility.trim().length() == 0) {
-            errorText.setText("Facility Type is required");
+            errorText.setText("Facility  is required");
+
+            return false;
+        }
+        if (City == null || City.trim().length() == 0) {
+            errorText.setText("City is required");
+
+            return false;
+        }
+        if (Postal == null || Postal.trim().length() == 0) {
+            errorText.setText("Postal Code is required");
 
             return false;
         }
