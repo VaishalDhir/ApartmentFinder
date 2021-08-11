@@ -40,7 +40,6 @@ const SignIn = async (req, res, next) => {
                       success: true,
                       message: "Login Successfully",
                       data: results,
-                      //  token: jToken,
                     });
                   } else {
                     console.log("in coreect");
