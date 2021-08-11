@@ -19,7 +19,7 @@
             android:layout_height="match_parent">
 
         <ImageView
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="150dp"
             android:id="@+id/apImage"
             />
@@ -36,9 +36,6 @@
                     android:background="@drawable/dlike" />
 
             </RelativeLayout>
-
-
-
 
         <TextView
             android:layout_width="match_parent"
