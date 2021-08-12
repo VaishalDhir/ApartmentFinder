@@ -165,7 +165,7 @@ public class ViewApartmentFragment extends Fragment {
             }
         });
         return vw;
-    }
+     }
 
     private void getEmailId(int apId) {
         try {
