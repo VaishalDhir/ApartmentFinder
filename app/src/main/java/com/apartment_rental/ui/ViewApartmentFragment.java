@@ -52,7 +52,6 @@ public class ViewApartmentFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
         View vw=inflater.inflate(R.layout.fragment_view_apartment, container, false);
 
@@ -268,8 +267,6 @@ public class ViewApartmentFragment extends Fragment {
             // ByteArrayInputStream arrayInputStream = new ByteArrayInputStream(bytes);
             Bitmap bmsp = BitmapFactory.decodeByteArray(image, 0 ,image.length);
             return bmsp;
-
-
         }
     }
 }
