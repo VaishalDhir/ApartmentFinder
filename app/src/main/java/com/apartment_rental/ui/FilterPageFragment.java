@@ -31,7 +31,6 @@ public class FilterPageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_filter_page, container, false);
 
         EditText locationSearchEd=(EditText) view.findViewById(R.id.searchLoc);
