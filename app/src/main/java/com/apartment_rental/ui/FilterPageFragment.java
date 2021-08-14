@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -41,6 +42,19 @@ public class FilterPageFragment extends Fragment {
         TextView err_text=(TextView) view.findViewById(R.id.errtext_f);
         Button searchBtn=(Button) view.findViewById(R.id.searchResult);
 
+        ImageView imagebackbtn=(ImageView) view.findViewById(R.id.backbtn);
+        imagebackbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new ApartmentListFragment();
+
+                ((AppCompatActivity) getActivity()).getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.nav_host_fragment, fragment)
+                        .addToBackStack(fragment.getTag())
+                        .commit();
+            }
+        });
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
