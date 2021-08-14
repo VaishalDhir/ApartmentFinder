@@ -283,7 +283,7 @@ public class UpdateFragment extends Fragment implements LocationListener {
             progress.dismiss();
             new MaterialAlertDialogBuilder(getActivity()).setMessage(ex.toString())
                     .setPositiveButton("OK",(dialog, which) -> {
-                        /////
+
                     }).show();
 
         }
@@ -448,7 +448,6 @@ public class UpdateFragment extends Fragment implements LocationListener {
                         } else {
                             Toast.makeText(getActivity(), "Go to settings and enable permissions", Toast.LENGTH_LONG)
                                     .show();
-                            //                            //proceed with logic by disabling the related features or quit the app.
                         }
                     }
                 }
